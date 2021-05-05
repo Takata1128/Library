@@ -1,0 +1,147 @@
+{
+	"cp-template": {
+		"prefix": "cp-template",
+		"body": "#pragma region Macros\n#include <bits/stdc++.h>\n#define rep(i, n) for(int(i) = 0; (i) < (n); (i)++)\n#define FOR(i, m, n) for(int(i) = (m); (i) < (n); (i)++)\n#define ALL(v) (v).begin(), (v).end()\n#define LLA(v) (v).rbegin(), (v).rend()\n#define SZ(v) (int)(v).size()\n#define INT(...)                                                               \\\n    int __VA_ARGS__;                                                           \\\n    read(__VA_ARGS__)\n#define LL(...)                                                                \\\n    ll __VA_ARGS__;                                                            \\\n    read(__VA_ARGS__)\n#define DOUBLE(...)                                                            \\\n    double __VA_ARGS__;                                                        \\\n    read(__VA_ARGS__)\n#define CHAR(...)                                                              \\\n    char __VA_ARGS__;                                                          \\\n    read(__VA_ARGS__)\n#define STRING(...)                                                            \\\n    string __VA_ARGS__;                                                        \\\n    read(__VA_ARGS__)\n#define VEC(type, name, size)                                                  \\\n    vector<type> name(size);                                                   \\\n    read(name)\n#define VEC2(type, name, height, width)                                        \\\n    vector<vector<type>> name(height, vector<type>(width));                    \\\n    read(name)\nusing namespace std;\nusing ll = long long;\nusing pii = pair<int, int>;\nusing pll = pair<ll, ll>;\nusing Graph = vector<vector<int>>;\ntemplate <typename T> struct edge {\n    int from, to;\n    T cost;\n    edge(int f, int t, T c) : from(f), to(t), cost(c) {}\n};\ntemplate <typename T> using WGraph = vector<vector<edge<T>>>;\nconst int INF = 1 << 30;\nconst ll LINF = 1LL << 60;\nconst int MOD = 1e9 + 7;\nconst char newl = '\\n';\ntemplate <class T> inline vector<T> make_vec(size_t a, T val) {\n    return vector<T>(a, val);\n}\ntemplate <class... Ts> inline auto make_vec(size_t a, Ts... ts) {\n    return vector<decltype(make_vec(ts...))>(a, make_vec(ts...));\n}\nvoid read() {}\ntemplate <class T> inline void read(T &a) { cin >> a; }\ntemplate <class T, class S> inline void read(pair<T, S> &p) {\n    read(p.first), read(p.second);\n}\ntemplate <class T> inline void read(vector<T> &v) {\n    for(auto &&a : v)\n        read(a);\n}\ntemplate <class Head, class... Tail>\ninline void read(Head &head, Tail &...tail) {\n    read(head), read(tail...);\n}\ntemplate <class T> void write(const T &a) { cout << a << '\\n'; }\ntemplate <class T> void write(const vector<T> &a) {\n    for(int i = 0; i < a.size(); i++)\n        cout << a[i] << (i + 1 == a.size() ? '\\n' : ' ');\n}\ntemplate <class Head, class... Tail>\nvoid write(const Head &head, const Tail &...tail) {\n    cout << head << ' ';\n    write(tail...);\n}\ntemplate <class T> void writel(const T &a) { cout << a << '\\n'; }\ntemplate <class T> void writel(const vector<T> &a) {\n    for(int i = 0; i < a.size(); i++)\n        cout << a[i] << '\\n';\n}\ntemplate <class Head, class... Tail>\nvoid writel(const Head &head, const Tail &...tail) {\n    cout << head << '\\n';\n    write(tail...);\n}\ntemplate <class T> auto sum(const vector<T> &a) {\n    return accumulate(ALL(a), T(0));\n}\ntemplate <class T> auto min(const vector<T> &a) { return *min_element(ALL(a)); }\ntemplate <class T> auto max(const vector<T> &a) { return *max_element(ALL(a)); }\ntemplate <class T> inline void chmax(T &a, T b) { (a < b ? a = b : a); }\ntemplate <class T> inline void chmin(T &a, T b) { (a > b ? a = b : a); }\nstruct IO {\n    IO() {\n        ios::sync_with_stdio(false);\n        cin.tie(nullptr);\n        cout << fixed << setprecision(10);\n    }\n} io;\n#pragma endregion\n\nint main() {\n    $1\n}",
+		"description": "cp-template"
+	},
+	"readint": {
+		"prefix": "readint",
+		"body": "read<int>();",
+		"description": "readint"
+	},
+	"reads input": {
+		"prefix": "readsinput",
+		"body": "reads<$1>();",
+		"description": "reads inputs"
+	},
+	"read ll": {
+		"prefix": "readll",
+		"body": "read<ll>();",
+		"description": "read ll"
+	},
+	"read vector ll": {
+		"prefix": "rvll",
+		"body": "readv<ll>($1);",
+		"description": "read vector ll"
+	},
+	"read vector int": {
+		"prefix": "rvint",
+		"body": "readv<int>($1);",
+		"description": "read vector int"
+	},
+	"prime_factor": {
+		"prefix": "prime_factor",
+		"body": "map<ll, int> prime_factor(ll n) {\r\n    map<ll, int> ret;\r\n    for(ll i = 2; i * i <= n; i++) {\r\n        while(n % i == 0) {\r\n            ret[i]++;\r\n            n /= i;\r\n        }\r\n    }\r\n    if(n != 1)\r\n        ret[n] = 1;\r\n    return ret;\r\n}",
+		"description": "素因数分解 スニペット"
+	},
+	"LazySegTree": {
+		"prefix": "lazysegtree",
+		"body": "// Range Sum Query by LazySegmentTree\r\nstruct LazySegTree {\r\n  private:\r\n    int n;\r\n    vector<ll> node, lazy;\r\n\r\n  public:\r\n    LazySegTree(vector<ll> v) {\r\n        int sz = (int)v.size();\r\n        n = 1;\r\n        while(n < sz)\r\n            n *= 2;\r\n        node.resize(2 * n - 1);\r\n        lazy.resize(2 * n - 1, 0);\r\n\r\n        for(int i = 0; i < sz; i++)\r\n            node[i + n - 1] = v[i];\r\n        for(int i = n - 2; i >= 0; i--)\r\n            node[i] = node[i * 2 + 1] + node[i * 2 + 2];\r\n    }\r\n\r\n    // k番目のノードについて遅延評価\r\n    void eval(int k, int l, int r) {\r\n        // 遅延配列を見て空でなかったら値を伝播\r\n        if(lazy[k] != 0) {\r\n            node[k] += lazy[k];\r\n            // 最下段かどうかチェック\r\n            // 伝播\r\n            if(r - l > 1) {\r\n                lazy[2 * k + 1] += lazy[k] / 2;\r\n                lazy[2 * k + 2] += lazy[k] / 2;\r\n            }\r\n        }\r\n\r\n        // 伝播の終了\r\n        lazy[k] = 0;\r\n    }\r\n\r\n    ll at(int k) { return getsum(k, k + 1); }\r\n\r\n    // [a,b)区間加算\r\n    void add(int a, int b, ll x, int k = 0, int l = 0, int r = -1) {\r\n        if(r < 0)\r\n            r = n;\r\n        // まず評価\r\n        eval(k, l, r);\r\n        // 範囲外なら何もしない\r\n        if(b <= l || r <= a)\r\n            return;\r\n\r\n        // 完全に被覆 遅延配列に値を入れ評価\r\n        if(a <= l && r <= b) {\r\n            lazy[k] += (r - l) * x;\r\n            eval(k, l, r);\r\n        }\r\n        // そうでないとき 子コードの値を再帰的に計算して計算済みの値をもってくる\r\n        else {\r\n            add(a, b, x, 2 * k + 1, l, (l + r) / 2);\r\n            add(a, b, x, 2 * k + 2, (l + r) / 2, r);\r\n            node[k] = node[2 * k + 1] + node[2 * k] + 2;\r\n        }\r\n    }\r\n\r\n    // [a,b)区間取得\r\n    ll getsum(int a, int b, int k = 0, int l = 0, int r = -1) {\r\n        if(r < 0)\r\n            r = n;\r\n        if(b <= l || r <= a)\r\n            return 0;\r\n\r\n        // まず評価\r\n        eval(k, l, r);\r\n        if(a <= l && r <= b)\r\n            return node[k];\r\n        ll vl = getsum(a, b, 2 * k + 1, l, (l + r) / 2);\r\n        ll vr = getsum(a, b, 2 * k + 2, (l + r) / 2, r);\r\n        return vl + vr;\r\n    }\r\n};",
+		"description": "遅延評価セグ木（区間加算）スニペット"
+	},
+	"UnionFind": {
+		"prefix": "unionfind",
+		"body": "// UnionFind\r\nstruct UnionFind {\r\n    vector<ll> par;\r\n    vector<ll> siz;\r\n\r\n    UnionFind(ll N) : par(N), siz(N, 1LL) {\r\n        for(int i = 0; i < N; i++)\r\n            par[i] = i;\r\n    }\r\n    int root(int x) {\r\n        if(par[x] == x)\r\n            return x;\r\n        return par[x] = root(par[x]);\r\n    }\r\n    void unite(int x, int y) {\r\n        int rx = root(x);\r\n        int ry = root(y);\r\n        if(rx == ry)\r\n            return;\r\n        if(siz[rx] < siz[ry])\r\n            swap(rx, ry);\r\n        siz[rx] += siz[ry];\r\n        par[ry] = rx;\r\n    }\r\n    bool same(int x, int y) {\r\n        int rx = root(x);\r\n        int ry = root(y);\r\n        return rx == ry;\r\n    }\r\n    ll size(ll x) { return siz[root(x)]; }\r\n};",
+		"description": "UnionFind スニペット"
+	},
+	"WeightedUnionFind": {
+		"prefix": "weightedunionfind",
+		"body": "//　重み付きUnionFind\r\nstruct WeightedUnionFind {\r\n    vector<ll> par;\r\n    vector<ll> siz;\r\n    vector<ll> diff_weight;\r\n\r\n    WeightedUnionFind(ll N) : par(N), siz(N, 1LL), diff_weight(N, 0) {\r\n        for(int i = 0; i < N; i++) {\r\n            par[i] = i;\r\n        }\r\n    }\r\n\r\n    ll weight(int x) {\r\n        root(x);\r\n        return diff_weight[x];\r\n    }\r\n\r\n    ll diff(int x, int y) { return weight(y) - weight(x); }\r\n\r\n    int root(int x) {\r\n        if(par[x] == x)\r\n            return x;\r\n        else {\r\n            int r = root(par[x]);\r\n            diff_weight[x] += diff_weight[par[x]];\r\n            return par[x] = r;\r\n        }\r\n    }\r\n    void unite(int x, int y, ll w) {\r\n        w += weight(x), w -= weight(y);\r\n        int rx = root(x);\r\n        int ry = root(y);\r\n        if(rx == ry)\r\n            return;\r\n        if(siz[rx] < siz[ry])\r\n            swap(rx, ry), w = -w;\r\n        siz[rx] += siz[ry];\r\n        par[ry] = rx;\r\n        diff_weight[ry] = w;\r\n    }\r\n    bool same(int x, int y) {\r\n        int rx = root(x);\r\n        int ry = root(y);\r\n        return rx == ry;\r\n    }\r\n    ll size(ll x) { return siz[root(x)]; }\r\n};",
+		"description": "WeightedUnionFind スニペット"
+	},
+	"BIT": {
+		"prefix": "BIT",
+		"body": "// 参考：https://qiita.com/drken/items/1b7e6e459c24a83bb7fd\n// 1-indexed BIT\n// add:log(N),sum:log(N),get_k-th:log(N)\n// https://codeforces.com/contest/1354/problem/D\nstruct BIT {\n    vector<ll> dat;\n\n    BIT(int n) {\n        dat.resize(n + 1);\n        for(int i = 0; i < (int)dat.size(); i++)\n            dat[i] = 0;\n    }\n\n    // a is 1-indexed\n    void add(int a, ll x) {\n        for(int i = a; i < (int)dat.size(); i += i & -i)\n            dat[i] = dat[i] + x;\n    }\n\n    // [1,a], a is 1-indexed\n    ll sum(int a) {\n        ll res = 0;\n        for(int i = a; i > 0; i -= i & -i) {\n            res = res + dat[i];\n        }\n        return res;\n    }\n\n    // [a,b), a and b are 1-indexed\n    ll sum(int a, int b) { return sum(b - 1) - sum(a - 1); }\n\n    // k-th number (k is 1-indexed)\n    // lower_bound\n    int get(ll k) {\n        if(k <= 0)\n            return 0;\n        int res = 0;\n        int N = 1;\n        while(N < (int)dat.size())\n            N *= 2;\n        for(int i = N / 2; i > 0; i /= 2) {\n            if(res + i < (int)dat.size() && dat[res + i] < k) {\n                k = k - dat[res + i];\n                res = res + i;\n            }\n        }\n        return res + 1;\n    }\n};",
+		"description": "BIT スニペット"
+	},
+	"Matrix": {
+		"prefix": "matrix",
+		"body": "#include <cassert>\n// 参考:https://ei1333.github.io/luzhiled/snippets/math/matrix.html\n// (掛け算と累乗)https://yukicoder.me/submissions/523126\n// 他は知らん\ntemplate <class T> struct Matrix {\n    vector<vector<T>> A;\n    Matrix() {}\n    Matrix(size_t n, size_t m) : A(n, vector<T>(m, 0)) {}\n    Matrix(size_t n) : A(n, vector<T>(n, 0)) {}\n\n    size_t height() const { return A.size(); }\n\n    size_t width() const { return A[0].size(); }\n\n    inline vector<T> &operator[](int k) { return A.at(k); }\n    inline const vector<T> &operator[](int k) const { return A.at(k); }\n\n    static Matrix I(size_t n) {\n        Matrix mat(n);\n        for(int i = 0; i < n; i++)\n            mat[i][i] = 1;\n        return mat;\n    }\n\n    Matrix &operator+=(const Matrix &B) {\n        size_t h = height(), w = width();\n        assert(h == B.height() && w == B.width);\n        for(int i = 0; i < h; i++) {\n            for(int j = 0; j < w; j++) {\n                (*this)[i][j] += B[i][j];\n            }\n        }\n        return *this;\n    }\n\n    Matrix &operator-=(const Matrix &B) {\n        size_t h = height(), w = width();\n        assert(h == B.height() && w == B.width);\n        for(int i = 0; i < h; i++) {\n            for(int j = 0; j < w; j++) {\n                (*this)[i][j] -= B[i][j];\n            }\n        }\n        return *this;\n    }\n\n    Matrix &operator*=(const Matrix &B) {\n        size_t h = height(), w = B.width(), p = width();\n        assert(p == B.height());\n        vector<vector<T>> C(h, vector<T>(w, 0));\n        for(int i = 0; i < h; i++) {\n            for(int j = 0; j < w; j++) {\n                for(int k = 0; k < p; k++) {\n                    C[i][j] += (*this)[i][k] * B[k][j];\n                }\n            }\n        }\n        A.swap(C);\n        return *this;\n    }\n\n    Matrix &operator^=(ll k) {\n        Matrix B = Matrix::I(height());\n        while(k > 0) {\n            if(k & 1)\n                B *= *this;\n            *this *= *this;\n            k >>= 1LL;\n        }\n        A.swap(B.A);\n        return *this;\n    }\n\n    Matrix operator+(const Matrix &B) const { return (Matrix(*this) += B); }\n    Matrix operator-(const Matrix &B) const { return (Matrix(*this) -= B); }\n    Matrix operator*(const Matrix &B) const { return (Matrix(*this) *= B); }\n    Matrix operator^(const ll k) const { return (Matrix(*this) ^= k); }\n\n    friend ostream &operator<<(ostream &os, const Matrix &p) {\n        size_t h = p.height(), w = p.width();\n        for(int i = 0; i < h; i++) {\n            os << \"[\";\n            for(int j = 0; j < w; j++) {\n                os << p[i][j] << (j + 1 == w ? \"]\\n\" : \",\");\n            }\n        }\n        return os;\n    }\n};",
+		"description": "行列 スニペット"
+	},
+	"split": {
+		"prefix": "split",
+		"body": "#include <sstream>\nvector<string> split(const string &s, char delim) {\n    vector<string> elems;\n    stringstream ss(s);\n    string item;\n    while(getline(ss, item, delim)) {\n        if(!item.empty()) {\n            elems.push_back(item);\n        }\n    }\n    return elems;\n}",
+		"description": "文字列分割 スニペット"
+	},
+	"Trie": {
+		"prefix": "trie",
+		"body": "// Trie木\n// 参考：https://algo-logic.info/trie-tree/\n// 挿入、検索ともにO(|文字列の長さ|)\n// https://atcoder.jp/contests/agc047/tasks/agc047_b\ntemplate <int char_size, int base> struct Trie {\n    struct Node {\n        vector<int> next; //子の頂点のインデックス\n        int last;         // 終端する単語数\n        int count;        // Nodeを共有する単語数\n        Node() : count(0), last(0) { next.assign(char_size, -1); }\n    };\n    vector<Node> nodes; // Trie木本体\n    Trie() { nodes.push_back(Node()); }\n\n    // 単語の挿入\n    void insert(const string &word) {\n        int node_idx = 0;\n        for(int i = 0; i < word.size(); i++) {\n            int c = word[i] - base;\n            int &next_idx = nodes[node_idx].next[c];\n            if(next_idx == -1) {\n                next_idx = nodes.size();\n                nodes.push_back(Node());\n            }\n            nodes[node_idx].count++;\n            node_idx = next_idx;\n        }\n        nodes[node_idx].count++;\n        nodes[node_idx].last++;\n    }\n\n    // 単語の検索（数を返す）\n    int search_count(const string &word, bool prefix = false) {\n        int node_idx = 0;\n        for(int i = 0; i < word.size(); i++) {\n            int c = word[i] - base;\n            int next_idx = nodes[node_idx].next[c];\n            if(next_idx == -1) {\n                return 0;\n            }\n            node_idx = next_idx;\n        }\n        return prefix ? nodes[node_idx].count : nodes[node_idx].last;\n    }\n\n    // prefixを持つ単語の検索（数を返す）\n    int prefix_count(const string &prefix) {\n        return search_count(prefix, true);\n    }\n\n    int word_count() { return nodes[0].count; }\n\n    int size() { return nodes.size(); }\n};",
+		"description": "trie-tree スニペット"
+	},
+	"graph": {
+		"prefix": "graph",
+		"body": "using Graph = vector<vector<int>>;",
+		"description": "graph スニペット"
+	},
+	"vector_int": {
+		"prefix": "vi",
+		"body": "vector<int> $1($2);",
+		"description": "vector_int"
+	},
+	"vector_ll": {
+		"prefix": "vl",
+		"body": "vector<int> $1($2);",
+		"description": "vector_ll"
+	},
+	"2D_vector_int": {
+		"prefix": "vvi",
+		"body": "vector<vector<int>> $1($2,vector<int>($3));",
+		"description": "2D_vector_int"
+	},
+	"2D_vector_ll": {
+		"prefix": "vvl",
+		"body": "vector<vector<ll>> $1($2,vector<ll>($3));",
+		"description": "2D_vector_ll"
+	},
+	"WeightedGraph": {
+		"prefix": "weightedgraph",
+		"body": "template <typename T> struct edge {\n    int to;\n    T cost;\n    edge(int t, T c) : to(t), cost(c) {}\n};\n\ntemplate <typename T> using Graph = vector<vector<edge<T>>>;\n",
+		"description": "WeightedGraph"
+	},
+	"dijkstra": {
+		"prefix": "dijkstra",
+		"body": "template <typename T> void dijkstra(int s, vector<T> &d, Graph<T> &G) {\n    priority_queue<pair<T, int>, vector<pair<T, int>>, greater<pair<T, int>>>\n        que;\n    const auto INF = numeric_limits<T>::max();\n    fill(All(d), INF);\n    d[s] = 0;\n    que.push(make_pair(0, s));\n    while(!que.empty()) {\n        auto p = que.top();\n        que.pop();\n        int v = p.second;\n        if(d[v] < p.first)\n            continue;\n        for(auto e : G[v]) {\n            if(d[e.to] > d[v] + e.cost) {\n                d[e.to] = d[v] + e.cost;\n                que.push(make_pair(d[e.to], e.to));\n            }\n        }\n    }\n    for(auto &x : d) {\n        if(x == INF)\n            x = -1;\n    }\n}",
+		"description": "dijkstra スニペット"
+	},
+	"BiCoefficient": {
+		"prefix": "bicoef",
+		"body": "//二項係数（nCk mod.p;1<=k<=n<=1e7,pは素数）for ModInt\r\ntemplate <class T> struct BiCoefficient {\r\n    vector<T> fac, finv, inv;\r\n    BiCoefficient(const int MAX) : fac(MAX), finv(MAX), inv(MAX) {\r\n        fac[0] = fac[1] = 1;\r\n        finv[0] = finv[1] = 1;\r\n        inv[1] = 1;\r\n        for(int i = 2; i < MAX; i++) {\r\n            fac[i] = fac[i - 1] * i;\r\n            inv[i] = -inv[MOD % i] * (MOD / i);\r\n            finv[i] = finv[i - 1] * inv[i];\r\n        }\r\n    }\r\n    T comb(int n, int k) {\r\n        if(n < k)\r\n            return 0;\r\n        if(n < 0 || k < 0)\r\n            return 0;\r\n        return fac[n] * finv[k] * finv[n - k];\r\n    }\r\n};",
+		"description": "bicoef"
+	},
+	"Combination_small": {
+		"prefix": "comb_small",
+		"body": "//二項係数 O(k)\r\n// nとkのどちらかが変化していくとき、O(変化量)ですべて求められる　多分\r\n// 参考：https://perogram.hateblo.jp/entry/2020/07/08/120017\r\n// https://yukicoder.me/submissions/520882\r\ntemplate <class T> T nCk(ll n, ll k, map<pair<ll, ll>, T> &mp) {\r\n    auto key = MP(n, k);\r\n    if(mp.count(key))\r\n        return mp[key];\r\n    if(k == 0 || k == n) {\r\n        T ret = 1;\r\n        return ret;\r\n    }\r\n    if(k == 1 || k == n - 1) {\r\n        T ret = n;\r\n        return ret;\r\n    }\r\n    // return mp[key] = nCk(n, k - 1, mp) * (n - k + 1) / k;\r\n    return mp[key] = nCk(n - 1, k, mp) * n / (n - k);\r\n}",
+		"description": "comb_small"
+	},
+	"divisor": {
+		"prefix": "divisor",
+		"body": "set<ll> divisor(ll n) {\n    set<ll> ret;\n    for(ll i = 1; i * i <= n; i++) {\n        if(n % i == 0) {\n            ret.insert(i);\n            if(i * i != n)\n                ret.insert(n / i);\n        }\n    }\n    return ret;\n}",
+		"description": "divisor"
+	},
+	"ModInt": {
+		"prefix": "modint",
+		"body": "template <uint_fast64_t MOD> class ModInt {\n    using u64 = uint_fast64_t;\n\n  public:\n    u64 val;\n\n    ModInt(const u64 x = 0) : val((x + MOD) % MOD) {}\n    constexpr u64 &value() { return val; }\n    constexpr ModInt operator-() { return val ? MOD - val : 0; }\n    constexpr ModInt operator+(const ModInt &rhs) const {\n        return ModInt(*this) += rhs;\n    }\n    constexpr ModInt operator-(const ModInt &rhs) const {\n        return ModInt(*this) -= rhs;\n    }\n    constexpr ModInt operator*(const ModInt &rhs) const {\n        return ModInt(*this) *= rhs;\n    }\n    constexpr ModInt operator/(const ModInt &rhs) const {\n        return ModInt(*this) /= rhs;\n    }\n    constexpr ModInt &operator+=(const ModInt &rhs) {\n        val += rhs.val;\n        if(val >= MOD) {\n            val -= MOD;\n        }\n        return *this;\n    }\n    constexpr ModInt &operator-=(const ModInt &rhs) {\n        if(val < rhs.val) {\n            val += MOD;\n        }\n        val -= rhs.val;\n        return *this;\n    }\n    constexpr ModInt &operator*=(const ModInt &rhs) {\n        val = val * rhs.val % MOD;\n        return *this;\n    }\n\n    constexpr ModInt &operator/=(const ModInt &rhs) {\n        *this *= rhs.inv();\n        return *this;\n    }\n\n    constexpr bool operator==(const ModInt &rhs) {\n        return this->val == rhs.val;\n    }\n    constexpr bool operator!=(const ModInt &rhs) {\n        return this->val != rhs.val;\n    }\n    friend constexpr ostream &operator<<(ostream &os, const ModInt<MOD> &x) {\n        return os << x.val;\n    }\n    friend constexpr istream &operator>>(istream &is, ModInt<MOD> &x) {\n        return is >> x.val;\n    }\n\n    constexpr ModInt inv() const { return ModInt(*this).pow(MOD - 2); }\n\n    constexpr ModInt pow(ll e) const {\n        u64 x = 1, p = val;\n        while(e > 0) {\n            if(e % 2 == 0) {\n                p = (p * p) % MOD;\n                e /= 2;\n            } else {\n                x = (x * p) % MOD;\n                e--;\n            }\n        }\n        return ModInt(x);\n    }\n};\n\nusing mint = ModInt<MOD>;",
+		"description": "modint"
+	},
+	"range max(min) query": {
+		"prefix": "rmq",
+		"body": "/*RMAXQ by SegmentTree */\r\nstruct SegmentTree {\r\n    int n;\r\n    vector<int> dat;\r\n    SegmentTree(int _n) {\r\n        n = 1;\r\n        while(n < _n)\r\n            n *= 2;\r\n        dat.resize(2 * n - 1);\r\n        for(int i = 0; i < 2 * n - 1; i++)\r\n            dat[i] = -1;\r\n    }\r\n\r\n    SegmentTree(vector<int> v) {\r\n        int sz = v.size();\r\n        n = 1;\r\n        while(n < sz)\r\n            n *= 2;\r\n        dat.resize(2 * n - 1);\r\n        for(int i = 0; i < sz; i++)\r\n            dat[i + n - 1] = v[i];\r\n        for(int i = n - 2; i >= 0; i--) {\r\n            dat[i] = max(dat[2 * i + 1], dat[2 * i + 2]);\r\n        }\r\n    }\r\n\r\n    void update(int k, int a) {\r\n        k += n - 1;\r\n        dat[k] = a;\r\n        while(k > 0) {\r\n            k = (k - 1) / 2;\r\n            dat[k] = max(dat[k * 2 + 1], dat[k * 2 + 2]);\r\n        }\r\n    }\r\n\r\n    int _query(int a, int b, int k, int l, int r) {\r\n        if(r <= a || b <= l)\r\n            return -1; //交差しない\r\n        if(a <= l && r <= b)\r\n            return dat[k]; //完全に含んでいる\r\n        else {\r\n            int vl = _query(a, b, k * 2 + 1, l, (l + r) / 2);\r\n            int vr = _query(a, b, k * 2 + 2, (l + r) / 2, r);\r\n            return max(vl, vr);\r\n        }\r\n    }\r\n    int query(int i, int j) { return _query(i, j, 0, 0, n); }\r\n};",
+		"description": "rmq"
+	},
+	"prime_sieve": {
+		"prefix": "prime_sieve",
+		"body": "// 素数篩＋素因数分解\n// 初期化O(N),素因数分解O(logN)\n// たくさん素因数分解するときはこっち\n#include <cassert>\nstruct prime_sieve {\n    int N;\n    vector<ll> sieve;\n    prime_sieve(int n) : N(n + 1) {\n        sieve.resize(N);\n        iota(All(sieve), 0);\n        init();\n    }\n\n    void init() {\n        for(int i = 2; i * i <= N; i++) {\n            if(sieve[i] < i)\n                continue;\n            for(int j = i * i; j < N; j += i) {\n                if(sieve[j] == j)\n                    sieve[j] = i;\n            }\n        }\n    }\n\n    map<ll, int> prime_factorize(ll n) {\n        assert(n <= N);\n        map<ll, int> ret;\n        while(n > 1) {\n            ret[sieve[n]]++;\n            n = n / sieve[n];\n        }\n        return ret;\n    }\n};",
+		"description": "prime_sieve"
+	},
+	"fast_ios": {
+		"prefix": "fast_ios",
+		"body": "ios::sync_with_stdio(false);\n cin.tie(nullptr);",
+		"description": "fast_ios"
+	},
+	"SCC": {
+		"prefix": "SCC",
+		"body": "// 強連結成分分解　O(|V|+|E|)\nclass Scc {\n  public:\n    int N;\n    vector<vector<int>> G, rG;\n    vector<int> vs;\n    vector<bool> used;\n    vector<int> cmp; // 新グラフのindex\n\n    Scc(vector<vector<int>> _G) : G(_G) {\n        N = G.size();\n        rG.resize(N, vector<int>());\n        for(int i = 0; i < G.size(); i++) {\n            for(auto nv : G[i]) {\n                rG[nv].push_back(i);\n            }\n        }\n        used.resize(N);\n        cmp.resize(N);\n    }\n\n    void dfs(int v) {\n        used[v] = true;\n        for(auto nv : G[v]) {\n            if(!used[nv])\n                dfs(nv);\n        }\n        vs.push_back(v);\n    }\n\n    void rdfs(int v, int k) {\n        used[v] = true;\n        cmp[v] = k;\n        for(auto nv : rG[v]) {\n            if(!used[nv])\n                rdfs(nv, k);\n        }\n    }\n\n    int process() {\n        fill(used.begin(), used.end(), false);\n        for(int v = 0; v < N; v++) {\n            if(!used[v])\n                dfs(v);\n        }\n        fill(used.begin(), used.end(), false);\n        int k = 0;\n        for(int i = N - 1; i >= 0; i--) {\n            if(!used[vs[i]])\n                rdfs(vs[i], k++);\n        }\n        return k;\n    }\n\n    vector<vector<int>> get() {\n        vector<vector<int>> g(N, vector<int>());\n        for(int i = 0; i < N; i++) {\n            for(auto nv : G[i]) {\n                if(cmp[i] == cmp[nv])\n                    continue;\n                g[cmp[i]].push_back(cmp[nv]);\n            }\n        }\n        return g;\n    }\n};",
+		"description": "SCC"
+	}
+}
