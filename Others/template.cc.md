@@ -3,15 +3,18 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
+  - icon: ':x:'
+    path: verify/convolution_mod.test.cpp
+    title: verify/convolution_mod.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/staticrmq.test.cpp
     title: verify/staticrmq.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/unionfind.test.cpp
     title: verify/unionfind.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cc
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Others/template.cc\"\n#pragma region Macros\n#include <bits/stdc++.h>\n\
@@ -113,10 +116,11 @@ data:
   path: Others/template.cc
   requiredBy: []
   timestamp: '2021-05-05 18:25:11+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/staticrmq.test.cpp
   - verify/unionfind.test.cpp
+  - verify/convolution_mod.test.cpp
 documentation_of: Others/template.cc
 layout: document
 redirect_from:

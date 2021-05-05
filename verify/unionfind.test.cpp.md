@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: DataStructure/UnionFind.cc
     title: DataStructure/UnionFind.cc
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Others/template.cc
     title: Others/template.cc
   _extendedRequiredBy: []
@@ -101,14 +101,14 @@ data:
     ../DataStructure/UnionFind.cc\"\n#include \"../Others/template.cc\"\n\nint main()\
     \ {\n    INT(n, q);\n    UnionFind uf(n);\n    rep(i, q) {\n        INT(t, u,\
     \ v);\n        if(t == 1) {\n            write(uf.same(u, v) ? 1 : 0);\n     \
-    \   } else {\n            uf.unite(u, v);\n        }\n    }\n    return 0;\n}"
+    \   } else {\n            uf.unite(u, v);\n        }\n    }\n    return 0;\n}\n"
   dependsOn:
   - DataStructure/UnionFind.cc
   - Others/template.cc
   isVerificationFile: true
   path: verify/unionfind.test.cpp
   requiredBy: []
-  timestamp: '2021-05-05 19:01:35+09:00'
+  timestamp: '2021-05-05 19:28:01+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/unionfind.test.cpp

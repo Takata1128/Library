@@ -67,7 +67,7 @@ data:
     - icon: ':warning:'
       path: Math/ComvolutionFFT.cc
       title: Math/ComvolutionFFT.cc
-    - icon: ':warning:'
+    - icon: ':x:'
       path: Math/Convolution.cc
       title: Math/Convolution.cc
     - icon: ':warning:'
@@ -89,7 +89,7 @@ data:
     - icon: ':warning:'
       path: Math/Matrix.cc
       title: Math/Matrix.cc
-    - icon: ':warning:'
+    - icon: ':x:'
       path: Math/ModInt.cc
       title: Math/ModInt.cc
   - name: Others
@@ -97,7 +97,7 @@ data:
     - icon: ':warning:'
       path: Others/Compress.cc
       title: "\u5EA7\u6A19\u5727\u7E2E"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Others/template.cc
       title: Others/template.cc
   - name: String
@@ -117,6 +117,9 @@ data:
   verificationCategories:
   - name: verify
     pages:
+    - icon: ':x:'
+      path: verify/convolution_mod.test.cpp
+      title: verify/convolution_mod.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/staticrmq.test.cpp
       title: verify/staticrmq.test.cpp
