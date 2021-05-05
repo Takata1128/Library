@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: DataStructure/SegmentTree.cc
     title: DataStructure/SegmentTree.cc
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Others/template.cc
     title: Others/template.cc
   _extendedRequiredBy: []

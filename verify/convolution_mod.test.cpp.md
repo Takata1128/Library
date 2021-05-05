@@ -1,34 +1,37 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Math/Convolution.cc
     title: Math/Convolution.cc
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Math/ModInt.cc
     title: Math/ModInt.cc
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Others/template.cc
     title: Others/template.cc
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    links: []
-  bundledCode: "#line 1 \"Math/Convolution.cc\"\n#include <bits/stdc++.h>\nusing namespace\
-    \ std;\nusing ll = long long;\n\ntemplate <typename Mint> class Convolution {\n\
-    \  private:\n    constexpr int primroot(int p) {\n        if(p == 2)\n       \
-    \     return 1;\n        if(p == 167772161)\n            return 3;\n        if(p\
-    \ == 469762049)\n            return 3;\n        if(p == 754974721)\n         \
-    \   return 11;\n        if(p == 998244353)\n            return 3;\n        assert(false);\n\
-    \    }\n\n  public:\n    void _ntt(vector<Mint> &a, bool is_inverse) {\n     \
-    \   const int n = a.size();\n        const int mod = Mint::get_mod();\n      \
-    \  const int g = primroot(mod);\n        assert((n ^ (n & -n)) == 0);\n      \
-    \  Mint h = Mint(g).pow((mod - 1) / n);\n        h = (is_inverse ? h.inv() : h);\n\
-    \n        int i = 0;\n        for(int j = 1; j < n - 1; j++) {\n            for(int\
+    PROBLEM: https://judge.yosupo.jp/problem/convolution_mod
+    links:
+    - https://judge.yosupo.jp/problem/convolution_mod
+  bundledCode: "#line 1 \"verify/convolution_mod.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/convolution_mod\"\
+    \n#line 1 \"Math/Convolution.cc\"\n#include <bits/stdc++.h>\nusing namespace std;\n\
+    using ll = long long;\n\ntemplate <typename Mint> class Convolution {\n  private:\n\
+    \    constexpr int primroot(int p) {\n        if(p == 2)\n            return 1;\n\
+    \        if(p == 167772161)\n            return 3;\n        if(p == 469762049)\n\
+    \            return 3;\n        if(p == 754974721)\n            return 11;\n \
+    \       if(p == 998244353)\n            return 3;\n        assert(false);\n  \
+    \  }\n\n  public:\n    void _ntt(vector<Mint> &a, bool is_inverse) {\n       \
+    \ const int n = a.size();\n        const int mod = Mint::get_mod();\n        const\
+    \ int g = primroot(mod);\n        assert((n ^ (n & -n)) == 0);\n        Mint h\
+    \ = Mint(g).pow((mod - 1) / n);\n        h = (is_inverse ? h.inv() : h);\n\n \
+    \       int i = 0;\n        for(int j = 1; j < n - 1; j++) {\n            for(int\
     \ k = n >> 1; k > (i ^= k); k >>= 1)\n                ;\n            if(j < i)\n\
     \                swap(a[i], a[j]);\n        }\n\n        for(int m = 1; m < n;\
     \ m *= 2) {\n            const int m2 = 2 * m;\n            const Mint base =\
@@ -124,16 +127,17 @@ data:
     \ T> inline void chmax(T &a, T b) { (a < b ? a = b : a); }\ntemplate <class T>\
     \ inline void chmin(T &a, T b) { (a > b ? a = b : a); }\nstruct IO {\n    IO()\
     \ {\n        ios::sync_with_stdio(false);\n        cin.tie(nullptr);\n       \
-    \ cout << fixed << setprecision(10);\n    }\n} io;\n#pragma endregion\n#line 4\
+    \ cout << fixed << setprecision(10);\n    }\n} io;\n#pragma endregion\n#line 5\
     \ \"verify/convolution_mod.test.cpp\"\n\nint main() {\n    INT(n, m);\n    VEC(int,\
     \ a, n);\n    VEC(int, b, m);\n    using mint = ModInt<998244353>;\n    Convolution<mint>\
     \ ntt;\n    auto ans = ntt.convolution(a, b);\n    for(int i = 0; i < n + m -\
     \ 1; i++)\n        cout << ans[i] << \" \\n\"[i == ans.size() - 1];\n}\n"
-  code: "#include \"../Math/Convolution.cc\"\n#include \"../Math/ModInt.cc\"\n#include\
-    \ \"../Others/template.cc\"\n\nint main() {\n    INT(n, m);\n    VEC(int, a, n);\n\
-    \    VEC(int, b, m);\n    using mint = ModInt<998244353>;\n    Convolution<mint>\
-    \ ntt;\n    auto ans = ntt.convolution(a, b);\n    for(int i = 0; i < n + m -\
-    \ 1; i++)\n        cout << ans[i] << \" \\n\"[i == ans.size() - 1];\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/convolution_mod\"\n#include\
+    \ \"../Math/Convolution.cc\"\n#include \"../Math/ModInt.cc\"\n#include \"../Others/template.cc\"\
+    \n\nint main() {\n    INT(n, m);\n    VEC(int, a, n);\n    VEC(int, b, m);\n \
+    \   using mint = ModInt<998244353>;\n    Convolution<mint> ntt;\n    auto ans\
+    \ = ntt.convolution(a, b);\n    for(int i = 0; i < n + m - 1; i++)\n        cout\
+    \ << ans[i] << \" \\n\"[i == ans.size() - 1];\n}\n"
   dependsOn:
   - Math/Convolution.cc
   - Math/ModInt.cc
@@ -141,8 +145,8 @@ data:
   isVerificationFile: true
   path: verify/convolution_mod.test.cpp
   requiredBy: []
-  timestamp: '2021-05-05 19:28:01+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2021-05-05 19:33:22+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/convolution_mod.test.cpp
 layout: document

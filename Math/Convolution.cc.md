@@ -3,12 +3,12 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/convolution_mod.test.cpp
     title: verify/convolution_mod.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cc
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 1 \"Math/Convolution.cc\"\n#include <bits/stdc++.h>\nusing namespace\
@@ -79,7 +79,7 @@ data:
   path: Math/Convolution.cc
   requiredBy: []
   timestamp: '2021-05-05 19:28:01+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/convolution_mod.test.cpp
 documentation_of: Math/Convolution.cc
