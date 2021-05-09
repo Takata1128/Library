@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: DataStructure/UnionFind.cc
     title: DataStructure/UnionFind.cc
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Others/template.cc
     title: Others/template.cc
   _extendedRequiredBy: []

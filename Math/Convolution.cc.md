@@ -6,9 +6,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/convolution_mod.test.cpp
     title: verify/convolution_mod.test.cpp
-  _isVerificationFailed: false
+  - icon: ':x:'
+    path: verify/inv_of_formal_power_series.test.cpp
+    title: verify/inv_of_formal_power_series.test.cpp
+  _isVerificationFailed: true
   _pathExtension: cc
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 1 \"Math/Convolution.cc\"\n#include <bits/stdc++.h>\nusing namespace\
@@ -35,7 +38,7 @@ data:
     \ &x : a)\n            x *= n_inv;\n    }\n\n    vector<Mint> convolution(const\
     \ vector<Mint> &_a, const vector<Mint> &_b) {\n        vector<Mint> a(_a), b(_b);\n\
     \        int s = a.size() + b.size();\n        int t = 1;\n        while(t < s)\n\
-    \            t *= 2;\n        a.resize(t);\n        b.resize(t);\n\n        ntt(a);\n\
+    \            t *= 2;\n        a.resize(t);\n        b.resize(t);\n        ntt(a);\n\
     \        ntt(b);\n        for(int i = 0; i < t; i++) {\n            a[i] *= b[i];\n\
     \        }\n        intt(a);\n        return a;\n    }\n\n    template <typename\
     \ T>\n    vector<Mint> convolution(const vector<T> &_a, const vector<T> &_b) {\n\
@@ -67,7 +70,7 @@ data:
     \ *= n_inv;\n    }\n\n    vector<Mint> convolution(const vector<Mint> &_a, const\
     \ vector<Mint> &_b) {\n        vector<Mint> a(_a), b(_b);\n        int s = a.size()\
     \ + b.size();\n        int t = 1;\n        while(t < s)\n            t *= 2;\n\
-    \        a.resize(t);\n        b.resize(t);\n\n        ntt(a);\n        ntt(b);\n\
+    \        a.resize(t);\n        b.resize(t);\n        ntt(a);\n        ntt(b);\n\
     \        for(int i = 0; i < t; i++) {\n            a[i] *= b[i];\n        }\n\
     \        intt(a);\n        return a;\n    }\n\n    template <typename T>\n   \
     \ vector<Mint> convolution(const vector<T> &_a, const vector<T> &_b) {\n     \
@@ -78,10 +81,11 @@ data:
   isVerificationFile: false
   path: Math/Convolution.cc
   requiredBy: []
-  timestamp: '2021-05-05 19:28:01+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2021-05-09 19:12:16+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/convolution_mod.test.cpp
+  - verify/inv_of_formal_power_series.test.cpp
 documentation_of: Math/Convolution.cc
 layout: document
 redirect_from:

@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Math/Convolution.cc
     title: Math/Convolution.cc
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Math/ModInt.cc
     title: Math/ModInt.cc
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Others/template.cc
     title: Others/template.cc
   _extendedRequiredBy: []
@@ -45,7 +45,7 @@ data:
     \ &x : a)\n            x *= n_inv;\n    }\n\n    vector<Mint> convolution(const\
     \ vector<Mint> &_a, const vector<Mint> &_b) {\n        vector<Mint> a(_a), b(_b);\n\
     \        int s = a.size() + b.size();\n        int t = 1;\n        while(t < s)\n\
-    \            t *= 2;\n        a.resize(t);\n        b.resize(t);\n\n        ntt(a);\n\
+    \            t *= 2;\n        a.resize(t);\n        b.resize(t);\n        ntt(a);\n\
     \        ntt(b);\n        for(int i = 0; i < t; i++) {\n            a[i] *= b[i];\n\
     \        }\n        intt(a);\n        return a;\n    }\n\n    template <typename\
     \ T>\n    vector<Mint> convolution(const vector<T> &_a, const vector<T> &_b) {\n\
@@ -71,17 +71,18 @@ data:
     \        val = val * rhs.val % MOD;\r\n        return *this;\r\n    }\r\n\r\n\
     \    constexpr ModInt &operator/=(const ModInt &rhs) {\r\n        *this *= rhs.inv();\r\
     \n        return *this;\r\n    }\r\n\r\n    constexpr bool operator==(const ModInt\
-    \ &rhs) { return this->a == rhs.a; }\r\n    constexpr bool operator!=(const ModInt\
-    \ &rhs) { return this->a != rhs.a; }\r\n    friend constexpr ostream &operator<<(ostream\
-    \ &os, const ModInt<MOD> &x) {\r\n        return os << x.val;\r\n    }\r\n   \
-    \ friend constexpr istream &operator>>(istream &is, ModInt<MOD> &x) {\r\n    \
-    \    return is >> x.val;\r\n    }\r\n\r\n    constexpr ModInt inv() const { return\
-    \ ModInt(*this).pow(MOD - 2); }\r\n\r\n    constexpr ModInt pow(long long e) const\
-    \ {\r\n        u64 x = 1, p = val;\r\n        while(e > 0) {\r\n            if(e\
-    \ % 2 == 0) {\r\n                p = (p * p) % MOD;\r\n                e /= 2;\r\
-    \n            } else {\r\n                x = (x * p) % MOD;\r\n             \
-    \   e--;\r\n            }\r\n        }\r\n        return ModInt(x);\r\n    }\r\
-    \n};\n#line 2 \"Others/template.cc\"\n#pragma region Macros\n#line 4 \"Others/template.cc\"\
+    \ &rhs) {\r\n        return this->val == rhs.val;\r\n    }\r\n    constexpr bool\
+    \ operator!=(const ModInt &rhs) {\r\n        return this->val != rhs.val;\r\n\
+    \    }\r\n    friend constexpr ostream &operator<<(ostream &os, const ModInt<MOD>\
+    \ &x) {\r\n        return os << x.val;\r\n    }\r\n    friend constexpr istream\
+    \ &operator>>(istream &is, ModInt<MOD> &x) {\r\n        return is >> x.val;\r\n\
+    \    }\r\n\r\n    constexpr ModInt inv() const { return ModInt(*this).pow(MOD\
+    \ - 2); }\r\n\r\n    constexpr ModInt pow(long long e) const {\r\n        u64\
+    \ x = 1, p = val;\r\n        while(e > 0) {\r\n            if(e % 2 == 0) {\r\n\
+    \                p = (p * p) % MOD;\r\n                e /= 2;\r\n           \
+    \ } else {\r\n                x = (x * p) % MOD;\r\n                e--;\r\n \
+    \           }\r\n        }\r\n        return ModInt(x);\r\n    }\r\n};\n#line\
+    \ 2 \"Others/template.cc\"\n#pragma region Macros\n#line 4 \"Others/template.cc\"\
     \n#define rep(i, n) for(int(i) = 0; (i) < (n); (i)++)\n#define FOR(i, m, n) for(int(i)\
     \ = (m); (i) < (n); (i)++)\n#define ALL(v) (v).begin(), (v).end()\n#define LLA(v)\
     \ (v).rbegin(), (v).rend()\n#define SZ(v) (int)(v).size()\n#define INT(...)  \
@@ -145,7 +146,7 @@ data:
   isVerificationFile: true
   path: verify/convolution_mod.test.cpp
   requiredBy: []
-  timestamp: '2021-05-05 19:33:22+09:00'
+  timestamp: '2021-05-09 19:12:16+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/convolution_mod.test.cpp
