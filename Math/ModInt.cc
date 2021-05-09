@@ -47,8 +47,12 @@ template <uint_fast64_t MOD> class ModInt {
         return *this;
     }
 
-    constexpr bool operator==(const ModInt &rhs) { return this->a == rhs.a; }
-    constexpr bool operator!=(const ModInt &rhs) { return this->a != rhs.a; }
+    constexpr bool operator==(const ModInt &rhs) {
+        return this->val == rhs.val;
+    }
+    constexpr bool operator!=(const ModInt &rhs) {
+        return this->val != rhs.val;
+    }
     friend constexpr ostream &operator<<(ostream &os, const ModInt<MOD> &x) {
         return os << x.val;
     }

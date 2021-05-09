@@ -68,7 +68,6 @@ template <typename Mint> class Convolution {
             t *= 2;
         a.resize(t);
         b.resize(t);
-
         ntt(a);
         ntt(b);
         for(int i = 0; i < t; i++) {

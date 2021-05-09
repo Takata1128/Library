@@ -24,7 +24,8 @@
                 "-O0",
                 "${file}",
                 "-o",
-                "${fileDirname}/a.out"
+                "${fileDirname}/a.out",
+                "-Wfatal-errors"
             ],
             "group": {
                 "kind": "build",
