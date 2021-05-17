@@ -1,4 +1,3 @@
-#pragma once
 #pragma region Macros
 #include <bits/stdc++.h>
 #define rep(i, n) for(int(i) = 0; (i) < (n); (i)++)
@@ -23,6 +22,9 @@
     read(__VA_ARGS__)
 #define VEC(type, name, size)                                                  \
     vector<type> name(size);                                                   \
+    read(name)
+#define VEC2(type, name, height, width)                                        \
+    vector<vector<type>> name(height, vector<type>(width));                    \
     read(name)
 using namespace std;
 using ll = long long;
@@ -51,7 +53,7 @@ template <class T, class S> inline void read(pair<T, S> &p) {
     read(p.first), read(p.second);
 }
 template <class T> inline void read(vector<T> &v) {
-    for(auto &a : v)
+    for(auto &&a : v)
         read(a);
 }
 template <class Head, class... Tail>
@@ -78,11 +80,25 @@ void writel(const Head &head, const Tail &...tail) {
     cout << head << '\n';
     write(tail...);
 }
-template <class T> auto sum(const T &a) { return accumulate(ALL(a), T(0)); }
-template <class T> auto min(const T &a) { return *min_element(ALL(a)); }
-template <class T> auto max(const T &a) { return *max_element(ALL(a)); }
-template <class T> inline void chmax(T &a, T b) { (a < b ? a = b : a); }
-template <class T> inline void chmin(T &a, T b) { (a > b ? a = b : a); }
+template <class T> auto sum(const vector<T> &a) {
+    return accumulate(ALL(a), T(0));
+}
+template <class T> auto min(const vector<T> &a) { return *min_element(ALL(a)); }
+template <class T> auto max(const vector<T> &a) { return *max_element(ALL(a)); }
+template <class T, class U> inline bool chmax(T &a, U b) {
+    if(a < b) {
+        a = b;
+        return 1;
+    }
+    return 0;
+}
+template <class T, class U> inline bool chmin(T &a, U b) {
+    if(a > b) {
+        a = b;
+        return 1;
+    }
+    return 0;
+}
 struct IO {
     IO() {
         ios::sync_with_stdio(false);

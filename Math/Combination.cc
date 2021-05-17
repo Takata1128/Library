@@ -59,7 +59,6 @@ struct Combination {
 };
 
 //二項係数（nCk mod.p;1<=k<=n<=2000,pは素数でなくともよい）
-#include <cstring>
 const int MAX_C = 1000;
 long long Com[MAX_C][MAX_C];
 void calc_com() {
@@ -72,6 +71,37 @@ void calc_com() {
         }
     }
 }
+
+//二項係数 (nCk mod.p; p is prime, Lucasの定理)
+struct Lucas {
+    vector<vector<ll>> com;
+    ll p;
+    Lucas(ll p) : p(p) { init(p); }
+
+    void init(ll p) {
+        com.assign(p, vector<ll>(p));
+        com[0][0] = 1;
+        for(int i = 1; i < p; i++) {
+            com[i][0] = 1;
+            for(int j = i; j > 0; j--) {
+                com[i][j] = (com[i - 1][j - 1] + com[i - 1][j]) % p;
+            }
+        }
+    }
+
+    ll comb(ll n, ll k) {
+        ll ret = 1;
+        while(n > 0) {
+            int ni = n % p;
+            int ki = k % p;
+            ret *= com[ni][ki];
+            ret %= p;
+            n /= p;
+            k /= p;
+        }
+        return ret;
+    }
+};
 
 //二項係数 O(k)
 // nとkのどちらかが変化していくとき、O(変化量)ですべて求められる　多分
