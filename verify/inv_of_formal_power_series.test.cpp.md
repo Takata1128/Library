@@ -100,13 +100,13 @@ data:
     \    assert(d >= 0);\n        F ret({Mint(1) / (*this)[0]});\n        for(int\
     \ i = 1; i < d; i <<= 1) {\n            ret = (ret * 2 - ret * ret * pre(i <<\
     \ 1)).pre(i << 1);\n        }\n        return ret.pre(d);\n    }\n\n    // multiply\
-    \ and divide (1+cz^d)\n    void multiply(const int d, const T c) {\n        int\
-    \ n = this->size();\n        if(c == T(1))\n            for(int i = n - d; i >=\
-    \ 0; i--)\n                (*this)[i + d] += (*this)[i];\n        else if(c ==\
-    \ T(-1))\n            for(int i = n - d; i >= 0; i--)\n                (*this)[i\
+    \ and divide (1+cz^d)\n    void multiply(const int d, const Mint c) {\n      \
+    \  int n = this->size();\n        if(c == T(1))\n            for(int i = n - d;\
+    \ i >= 0; i--)\n                (*this)[i + d] += (*this)[i];\n        else if(c\
+    \ == T(-1))\n            for(int i = n - d; i >= 0; i--)\n                (*this)[i\
     \ + d] -= (*this)[i];\n        else\n            for(int i = n - d; i >= 0; i--)\n\
     \                (*this)[i + d] += (*this)[i] * c;\n    }\n    void divide(const\
-    \ int d, const T c) {\n        int n = this->size();\n        if(c == T(1))\n\
+    \ int d, const Mint c) {\n        int n = this->size();\n        if(c == T(1))\n\
     \            for(int i = 0; i < n - d; i++)\n                (*this)[i + d] -=\
     \ (*this)[i];\n        else if(c == T(-1))\n            for(int i = 0; i < n -\
     \ d; i++)\n                (*this)[i + d] += (*this)[i];\n        else\n     \
@@ -214,7 +214,7 @@ data:
   isVerificationFile: true
   path: verify/inv_of_formal_power_series.test.cpp
   requiredBy: []
-  timestamp: '2021-05-20 17:31:31+09:00'
+  timestamp: '2021-05-20 17:39:02+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/inv_of_formal_power_series.test.cpp

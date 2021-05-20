@@ -133,10 +133,10 @@ data:
   timestamp: '2021-05-17 20:13:15+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - verify/convolution_mod.test.cpp
   - verify/unionfind.test.cpp
   - verify/range_chmin_chmax_add_range_sum.test.cpp
   - verify/staticrmq.test.cpp
+  - verify/convolution_mod.test.cpp
   - verify/inv_of_formal_power_series.test.cpp
 documentation_of: Others/template.cc
 layout: document
