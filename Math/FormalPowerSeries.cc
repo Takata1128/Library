@@ -120,10 +120,10 @@ template <typename Mint> struct FormalPowerSeries : public vector<Mint> {
     // multiply and divide (1+cz^d)
     void multiply(const int d, const Mint c) {
         int n = this->size();
-        if(c == T(1))
+        if(c == Mint(1))
             for(int i = n - d; i >= 0; i--)
                 (*this)[i + d] += (*this)[i];
-        else if(c == T(-1))
+        else if(c == Mint(-1))
             for(int i = n - d; i >= 0; i--)
                 (*this)[i + d] -= (*this)[i];
         else
@@ -132,10 +132,10 @@ template <typename Mint> struct FormalPowerSeries : public vector<Mint> {
     }
     void divide(const int d, const Mint c) {
         int n = this->size();
-        if(c == T(1))
+        if(c == Mint(1))
             for(int i = 0; i < n - d; i++)
                 (*this)[i + d] -= (*this)[i];
-        else if(c == T(-1))
+        else if(c == Mint(-1))
             for(int i = 0; i < n - d; i++)
                 (*this)[i + d] += (*this)[i];
         else
