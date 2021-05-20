@@ -42,15 +42,25 @@ data:
     \           return 0;\r\n        if(n < 0 || k < 0)\r\n            return 0;\r\
     \n        return fac[n] * (finv[k] * finv[n - k] % MOD) % MOD;\r\n    }\r\n};\r\
     \n\r\n//\u4E8C\u9805\u4FC2\u6570\uFF08nCk mod.p;1<=k<=n<=2000,p\u306F\u7D20\u6570\
-    \u3067\u306A\u304F\u3068\u3082\u3088\u3044\uFF09\r\n#line 63 \"Math/Combination.cc\"\
-    \nconst int MAX_C = 1000;\r\nlong long Com[MAX_C][MAX_C];\r\nvoid calc_com() {\r\
-    \n    memset(Com, 0, sizeof(Com));\r\n    Com[0][0] = 1;\r\n    for(int i = 1;\
-    \ i < MAX_C; ++i) {\r\n        Com[i][0] = 1;\r\n        for(int j = 1; j < MAX_C;\
-    \ ++j) {\r\n            Com[i][j] = (Com[i - 1][j - 1] + Com[i - 1][j]) % MOD;\r\
-    \n        }\r\n    }\r\n}\r\n\r\n//\u4E8C\u9805\u4FC2\u6570 O(k)\r\n// n\u3068\
-    k\u306E\u3069\u3061\u3089\u304B\u304C\u5909\u5316\u3057\u3066\u3044\u304F\u3068\
-    \u304D\u3001O(\u5909\u5316\u91CF)\u3067\u3059\u3079\u3066\u6C42\u3081\u3089\u308C\
-    \u308B\u3000\u591A\u5206\r\n// \u53C2\u8003\uFF1Ahttps://perogram.hateblo.jp/entry/2020/07/08/120017\r\
+    \u3067\u306A\u304F\u3068\u3082\u3088\u3044\uFF09\r\nconst int MAX_C = 1000;\r\n\
+    long long Com[MAX_C][MAX_C];\r\nvoid calc_com() {\r\n    memset(Com, 0, sizeof(Com));\r\
+    \n    Com[0][0] = 1;\r\n    for(int i = 1; i < MAX_C; ++i) {\r\n        Com[i][0]\
+    \ = 1;\r\n        for(int j = 1; j < MAX_C; ++j) {\r\n            Com[i][j] =\
+    \ (Com[i - 1][j - 1] + Com[i - 1][j]) % MOD;\r\n        }\r\n    }\r\n}\r\n\r\n\
+    //\u4E8C\u9805\u4FC2\u6570 (nCk mod.p; p is prime, Lucas\u306E\u5B9A\u7406)\r\n\
+    struct Lucas {\r\n    vector<vector<ll>> com;\r\n    ll p;\r\n    Lucas(ll p)\
+    \ : p(p) { init(p); }\r\n\r\n    void init(ll p) {\r\n        com.assign(p, vector<ll>(p));\r\
+    \n        com[0][0] = 1;\r\n        for(int i = 1; i < p; i++) {\r\n         \
+    \   com[i][0] = 1;\r\n            for(int j = i; j > 0; j--) {\r\n           \
+    \     com[i][j] = (com[i - 1][j - 1] + com[i - 1][j]) % p;\r\n            }\r\n\
+    \        }\r\n    }\r\n\r\n    ll comb(ll n, ll k) {\r\n        ll ret = 1;\r\n\
+    \        while(n > 0) {\r\n            int ni = n % p;\r\n            int ki =\
+    \ k % p;\r\n            ret *= com[ni][ki];\r\n            ret %= p;\r\n     \
+    \       n /= p;\r\n            k /= p;\r\n        }\r\n        return ret;\r\n\
+    \    }\r\n};\r\n\r\n//\u4E8C\u9805\u4FC2\u6570 O(k)\r\n// n\u3068k\u306E\u3069\
+    \u3061\u3089\u304B\u304C\u5909\u5316\u3057\u3066\u3044\u304F\u3068\u304D\u3001\
+    O(\u5909\u5316\u91CF)\u3067\u3059\u3079\u3066\u6C42\u3081\u3089\u308C\u308B\u3000\
+    \u591A\u5206\r\n// \u53C2\u8003\uFF1Ahttps://perogram.hateblo.jp/entry/2020/07/08/120017\r\
     \n// https://yukicoder.me/submissions/520882\r\ntemplate <class T> T nCk(ll n,\
     \ ll k, map<pair<ll, ll>, T> &mp) {\r\n    auto key = {n, k};\r\n    if(mp.count(key))\r\
     \n        return mp[key];\r\n    if(k == 0 || k == n) {\r\n        T ret = 1;\r\
@@ -89,15 +99,25 @@ data:
     \           return 0;\r\n        if(n < 0 || k < 0)\r\n            return 0;\r\
     \n        return fac[n] * (finv[k] * finv[n - k] % MOD) % MOD;\r\n    }\r\n};\r\
     \n\r\n//\u4E8C\u9805\u4FC2\u6570\uFF08nCk mod.p;1<=k<=n<=2000,p\u306F\u7D20\u6570\
-    \u3067\u306A\u304F\u3068\u3082\u3088\u3044\uFF09\r\n#include <cstring>\r\nconst\
-    \ int MAX_C = 1000;\r\nlong long Com[MAX_C][MAX_C];\r\nvoid calc_com() {\r\n \
-    \   memset(Com, 0, sizeof(Com));\r\n    Com[0][0] = 1;\r\n    for(int i = 1; i\
-    \ < MAX_C; ++i) {\r\n        Com[i][0] = 1;\r\n        for(int j = 1; j < MAX_C;\
-    \ ++j) {\r\n            Com[i][j] = (Com[i - 1][j - 1] + Com[i - 1][j]) % MOD;\r\
-    \n        }\r\n    }\r\n}\r\n\r\n//\u4E8C\u9805\u4FC2\u6570 O(k)\r\n// n\u3068\
-    k\u306E\u3069\u3061\u3089\u304B\u304C\u5909\u5316\u3057\u3066\u3044\u304F\u3068\
-    \u304D\u3001O(\u5909\u5316\u91CF)\u3067\u3059\u3079\u3066\u6C42\u3081\u3089\u308C\
-    \u308B\u3000\u591A\u5206\r\n// \u53C2\u8003\uFF1Ahttps://perogram.hateblo.jp/entry/2020/07/08/120017\r\
+    \u3067\u306A\u304F\u3068\u3082\u3088\u3044\uFF09\r\nconst int MAX_C = 1000;\r\n\
+    long long Com[MAX_C][MAX_C];\r\nvoid calc_com() {\r\n    memset(Com, 0, sizeof(Com));\r\
+    \n    Com[0][0] = 1;\r\n    for(int i = 1; i < MAX_C; ++i) {\r\n        Com[i][0]\
+    \ = 1;\r\n        for(int j = 1; j < MAX_C; ++j) {\r\n            Com[i][j] =\
+    \ (Com[i - 1][j - 1] + Com[i - 1][j]) % MOD;\r\n        }\r\n    }\r\n}\r\n\r\n\
+    //\u4E8C\u9805\u4FC2\u6570 (nCk mod.p; p is prime, Lucas\u306E\u5B9A\u7406)\r\n\
+    struct Lucas {\r\n    vector<vector<ll>> com;\r\n    ll p;\r\n    Lucas(ll p)\
+    \ : p(p) { init(p); }\r\n\r\n    void init(ll p) {\r\n        com.assign(p, vector<ll>(p));\r\
+    \n        com[0][0] = 1;\r\n        for(int i = 1; i < p; i++) {\r\n         \
+    \   com[i][0] = 1;\r\n            for(int j = i; j > 0; j--) {\r\n           \
+    \     com[i][j] = (com[i - 1][j - 1] + com[i - 1][j]) % p;\r\n            }\r\n\
+    \        }\r\n    }\r\n\r\n    ll comb(ll n, ll k) {\r\n        ll ret = 1;\r\n\
+    \        while(n > 0) {\r\n            int ni = n % p;\r\n            int ki =\
+    \ k % p;\r\n            ret *= com[ni][ki];\r\n            ret %= p;\r\n     \
+    \       n /= p;\r\n            k /= p;\r\n        }\r\n        return ret;\r\n\
+    \    }\r\n};\r\n\r\n//\u4E8C\u9805\u4FC2\u6570 O(k)\r\n// n\u3068k\u306E\u3069\
+    \u3061\u3089\u304B\u304C\u5909\u5316\u3057\u3066\u3044\u304F\u3068\u304D\u3001\
+    O(\u5909\u5316\u91CF)\u3067\u3059\u3079\u3066\u6C42\u3081\u3089\u308C\u308B\u3000\
+    \u591A\u5206\r\n// \u53C2\u8003\uFF1Ahttps://perogram.hateblo.jp/entry/2020/07/08/120017\r\
     \n// https://yukicoder.me/submissions/520882\r\ntemplate <class T> T nCk(ll n,\
     \ ll k, map<pair<ll, ll>, T> &mp) {\r\n    auto key = {n, k};\r\n    if(mp.count(key))\r\
     \n        return mp[key];\r\n    if(k == 0 || k == n) {\r\n        T ret = 1;\r\
@@ -109,7 +129,7 @@ data:
   isVerificationFile: false
   path: Math/Combination.cc
   requiredBy: []
-  timestamp: '2021-05-05 18:25:11+09:00'
+  timestamp: '2021-05-17 20:13:15+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: Math/Combination.cc

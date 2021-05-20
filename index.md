@@ -18,7 +18,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: DataStructure/SegmentTree.cc
       title: DataStructure/SegmentTree.cc
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: DataStructure/SegmentTreeBeats.cc
       title: DataStructure/SegmentTreeBeats.cc
     - icon: ':warning:'
@@ -123,6 +123,9 @@ data:
     - icon: ':x:'
       path: verify/inv_of_formal_power_series.test.cpp
       title: verify/inv_of_formal_power_series.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/range_chmin_chmax_add_range_sum.test.cpp
+      title: verify/range_chmin_chmax_add_range_sum.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/staticrmq.test.cpp
       title: verify/staticrmq.test.cpp
