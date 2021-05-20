@@ -6,7 +6,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/convolution_mod.test.cpp
     title: verify/convolution_mod.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/inv_of_formal_power_series.test.cpp
     title: verify/inv_of_formal_power_series.test.cpp
   - icon: ':heavy_check_mark:'
@@ -18,9 +18,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/unionfind.test.cpp
     title: verify/unionfind.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cc
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 1 \"Others/template.cc\"\n#pragma region Macros\n#include <bits/stdc++.h>\n\
@@ -131,7 +131,7 @@ data:
   path: Others/template.cc
   requiredBy: []
   timestamp: '2021-05-17 20:13:15+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/unionfind.test.cpp
   - verify/range_chmin_chmax_add_range_sum.test.cpp

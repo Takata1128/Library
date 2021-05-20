@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Math/Convolution.cc
     title: Math/Convolution.cc
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Math/ModInt.cc
     title: Math/ModInt.cc
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Others/template.cc
     title: Others/template.cc
   _extendedRequiredBy: []

@@ -1,23 +1,23 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Math/Convolution.cc
     title: Math/Convolution.cc
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Math/FormalPowerSeries.cc
     title: Math/FormalPowerSeries.cc
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Math/ModInt.cc
     title: Math/ModInt.cc
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Others/template.cc
     title: Others/template.cc
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/inv_of_formal_power_series
@@ -101,79 +101,79 @@ data:
     \ i = 1; i < d; i <<= 1) {\n            ret = (ret * 2 - ret * ret * pre(i <<\
     \ 1)).pre(i << 1);\n        }\n        return ret.pre(d);\n    }\n\n    // multiply\
     \ and divide (1+cz^d)\n    void multiply(const int d, const Mint c) {\n      \
-    \  int n = this->size();\n        if(c == T(1))\n            for(int i = n - d;\
-    \ i >= 0; i--)\n                (*this)[i + d] += (*this)[i];\n        else if(c\
-    \ == T(-1))\n            for(int i = n - d; i >= 0; i--)\n                (*this)[i\
-    \ + d] -= (*this)[i];\n        else\n            for(int i = n - d; i >= 0; i--)\n\
-    \                (*this)[i + d] += (*this)[i] * c;\n    }\n    void divide(const\
-    \ int d, const Mint c) {\n        int n = this->size();\n        if(c == T(1))\n\
-    \            for(int i = 0; i < n - d; i++)\n                (*this)[i + d] -=\
-    \ (*this)[i];\n        else if(c == T(-1))\n            for(int i = 0; i < n -\
-    \ d; i++)\n                (*this)[i + d] += (*this)[i];\n        else\n     \
-    \       for(int i = 0; i < n - d; i++)\n                (*this)[i + d] -= (*this)[i]\
-    \ * c;\n    }\n};\n#line 2 \"Math/ModInt.cc\"\nusing namespace std;\r\n/* ModInt\
-    \ */\r\ntemplate <uint_fast64_t MOD> class ModInt {\r\n    using u64 = uint_fast64_t;\r\
-    \n\r\n  public:\r\n    u64 val;\r\n\r\n    ModInt(const u64 x = 0) : val((x +\
-    \ MOD) % MOD) {}\r\n    constexpr u64 &value() { return val; }\r\n    static const\
-    \ u64 get_mod() { return MOD; }\r\n    constexpr ModInt operator-() { return val\
-    \ ? MOD - val : 0; }\r\n    constexpr ModInt operator+(const ModInt &rhs) const\
-    \ {\r\n        return ModInt(*this) += rhs;\r\n    }\r\n    constexpr ModInt operator-(const\
-    \ ModInt &rhs) const {\r\n        return ModInt(*this) -= rhs;\r\n    }\r\n  \
-    \  constexpr ModInt operator*(const ModInt &rhs) const {\r\n        return ModInt(*this)\
-    \ *= rhs;\r\n    }\r\n    constexpr ModInt operator/(const ModInt &rhs) const\
-    \ {\r\n        return ModInt(*this) /= rhs;\r\n    }\r\n    constexpr ModInt &operator+=(const\
-    \ ModInt &rhs) {\r\n        val += rhs.val;\r\n        if(val >= MOD) {\r\n  \
-    \          val -= MOD;\r\n        }\r\n        return *this;\r\n    }\r\n    constexpr\
-    \ ModInt &operator-=(const ModInt &rhs) {\r\n        if(val < rhs.val) {\r\n \
-    \           val += MOD;\r\n        }\r\n        val -= rhs.val;\r\n        return\
-    \ *this;\r\n    }\r\n    constexpr ModInt &operator*=(const ModInt &rhs) {\r\n\
-    \        val = val * rhs.val % MOD;\r\n        return *this;\r\n    }\r\n\r\n\
-    \    constexpr ModInt &operator/=(const ModInt &rhs) {\r\n        *this *= rhs.inv();\r\
-    \n        return *this;\r\n    }\r\n\r\n    constexpr bool operator==(const ModInt\
-    \ &rhs) {\r\n        return this->val == rhs.val;\r\n    }\r\n    constexpr bool\
-    \ operator!=(const ModInt &rhs) {\r\n        return this->val != rhs.val;\r\n\
-    \    }\r\n    friend constexpr ostream &operator<<(ostream &os, const ModInt<MOD>\
-    \ &x) {\r\n        return os << x.val;\r\n    }\r\n    friend constexpr istream\
-    \ &operator>>(istream &is, ModInt<MOD> &x) {\r\n        return is >> x.val;\r\n\
-    \    }\r\n\r\n    constexpr ModInt inv() const { return ModInt(*this).pow(MOD\
-    \ - 2); }\r\n\r\n    constexpr ModInt pow(long long e) const {\r\n        u64\
-    \ x = 1, p = val;\r\n        while(e > 0) {\r\n            if(e % 2 == 0) {\r\n\
-    \                p = (p * p) % MOD;\r\n                e /= 2;\r\n           \
-    \ } else {\r\n                x = (x * p) % MOD;\r\n                e--;\r\n \
-    \           }\r\n        }\r\n        return ModInt(x);\r\n    }\r\n};\n#line\
-    \ 1 \"Others/template.cc\"\n#pragma region Macros\n#line 3 \"Others/template.cc\"\
-    \n#define rep(i, n) for(int(i) = 0; (i) < (n); (i)++)\n#define FOR(i, m, n) for(int(i)\
-    \ = (m); (i) < (n); (i)++)\n#define ALL(v) (v).begin(), (v).end()\n#define LLA(v)\
-    \ (v).rbegin(), (v).rend()\n#define SZ(v) (int)(v).size()\n#define INT(...)  \
-    \                                                             \\\n    int __VA_ARGS__;\
-    \                                                           \\\n    read(__VA_ARGS__)\n\
-    #define LL(...)                                                              \
-    \  \\\n    ll __VA_ARGS__;                                                   \
-    \         \\\n    read(__VA_ARGS__)\n#define DOUBLE(...)                     \
-    \                                       \\\n    double __VA_ARGS__;          \
+    \  int n = this->size();\n        if(c == Mint(1))\n            for(int i = n\
+    \ - d; i >= 0; i--)\n                (*this)[i + d] += (*this)[i];\n        else\
+    \ if(c == Mint(-1))\n            for(int i = n - d; i >= 0; i--)\n           \
+    \     (*this)[i + d] -= (*this)[i];\n        else\n            for(int i = n -\
+    \ d; i >= 0; i--)\n                (*this)[i + d] += (*this)[i] * c;\n    }\n\
+    \    void divide(const int d, const Mint c) {\n        int n = this->size();\n\
+    \        if(c == Mint(1))\n            for(int i = 0; i < n - d; i++)\n      \
+    \          (*this)[i + d] -= (*this)[i];\n        else if(c == Mint(-1))\n   \
+    \         for(int i = 0; i < n - d; i++)\n                (*this)[i + d] += (*this)[i];\n\
+    \        else\n            for(int i = 0; i < n - d; i++)\n                (*this)[i\
+    \ + d] -= (*this)[i] * c;\n    }\n};\n#line 2 \"Math/ModInt.cc\"\nusing namespace\
+    \ std;\r\n/* ModInt */\r\ntemplate <uint_fast64_t MOD> class ModInt {\r\n    using\
+    \ u64 = uint_fast64_t;\r\n\r\n  public:\r\n    u64 val;\r\n\r\n    ModInt(const\
+    \ u64 x = 0) : val((x + MOD) % MOD) {}\r\n    constexpr u64 &value() { return\
+    \ val; }\r\n    static const u64 get_mod() { return MOD; }\r\n    constexpr ModInt\
+    \ operator-() { return val ? MOD - val : 0; }\r\n    constexpr ModInt operator+(const\
+    \ ModInt &rhs) const {\r\n        return ModInt(*this) += rhs;\r\n    }\r\n  \
+    \  constexpr ModInt operator-(const ModInt &rhs) const {\r\n        return ModInt(*this)\
+    \ -= rhs;\r\n    }\r\n    constexpr ModInt operator*(const ModInt &rhs) const\
+    \ {\r\n        return ModInt(*this) *= rhs;\r\n    }\r\n    constexpr ModInt operator/(const\
+    \ ModInt &rhs) const {\r\n        return ModInt(*this) /= rhs;\r\n    }\r\n  \
+    \  constexpr ModInt &operator+=(const ModInt &rhs) {\r\n        val += rhs.val;\r\
+    \n        if(val >= MOD) {\r\n            val -= MOD;\r\n        }\r\n       \
+    \ return *this;\r\n    }\r\n    constexpr ModInt &operator-=(const ModInt &rhs)\
+    \ {\r\n        if(val < rhs.val) {\r\n            val += MOD;\r\n        }\r\n\
+    \        val -= rhs.val;\r\n        return *this;\r\n    }\r\n    constexpr ModInt\
+    \ &operator*=(const ModInt &rhs) {\r\n        val = val * rhs.val % MOD;\r\n \
+    \       return *this;\r\n    }\r\n\r\n    constexpr ModInt &operator/=(const ModInt\
+    \ &rhs) {\r\n        *this *= rhs.inv();\r\n        return *this;\r\n    }\r\n\
+    \r\n    constexpr bool operator==(const ModInt &rhs) {\r\n        return this->val\
+    \ == rhs.val;\r\n    }\r\n    constexpr bool operator!=(const ModInt &rhs) {\r\
+    \n        return this->val != rhs.val;\r\n    }\r\n    friend constexpr ostream\
+    \ &operator<<(ostream &os, const ModInt<MOD> &x) {\r\n        return os << x.val;\r\
+    \n    }\r\n    friend constexpr istream &operator>>(istream &is, ModInt<MOD> &x)\
+    \ {\r\n        return is >> x.val;\r\n    }\r\n\r\n    constexpr ModInt inv()\
+    \ const { return ModInt(*this).pow(MOD - 2); }\r\n\r\n    constexpr ModInt pow(long\
+    \ long e) const {\r\n        u64 x = 1, p = val;\r\n        while(e > 0) {\r\n\
+    \            if(e % 2 == 0) {\r\n                p = (p * p) % MOD;\r\n      \
+    \          e /= 2;\r\n            } else {\r\n                x = (x * p) % MOD;\r\
+    \n                e--;\r\n            }\r\n        }\r\n        return ModInt(x);\r\
+    \n    }\r\n};\n#line 1 \"Others/template.cc\"\n#pragma region Macros\n#line 3\
+    \ \"Others/template.cc\"\n#define rep(i, n) for(int(i) = 0; (i) < (n); (i)++)\n\
+    #define FOR(i, m, n) for(int(i) = (m); (i) < (n); (i)++)\n#define ALL(v) (v).begin(),\
+    \ (v).end()\n#define LLA(v) (v).rbegin(), (v).rend()\n#define SZ(v) (int)(v).size()\n\
+    #define INT(...)                                                             \
+    \  \\\n    int __VA_ARGS__;                                                  \
+    \         \\\n    read(__VA_ARGS__)\n#define LL(...)                         \
+    \                                       \\\n    ll __VA_ARGS__;              \
     \                                              \\\n    read(__VA_ARGS__)\n#define\
-    \ CHAR(...)                                                              \\\n\
-    \    char __VA_ARGS__;                                                       \
-    \   \\\n    read(__VA_ARGS__)\n#define STRING(...)                           \
-    \                                 \\\n    string __VA_ARGS__;                \
-    \                                        \\\n    read(__VA_ARGS__)\n#define VEC(type,\
-    \ name, size)                                                  \\\n    vector<type>\
-    \ name(size);                                                   \\\n    read(name)\n\
-    #define VEC2(type, name, height, width)                                      \
-    \  \\\n    vector<vector<type>> name(height, vector<type>(width));           \
-    \         \\\n    read(name)\nusing namespace std;\nusing ll = long long;\nusing\
-    \ pii = pair<int, int>;\nusing pll = pair<ll, ll>;\nusing Graph = vector<vector<int>>;\n\
-    template <typename T> struct edge {\n    int from, to;\n    T cost;\n    edge(int\
-    \ f, int t, T c) : from(f), to(t), cost(c) {}\n};\ntemplate <typename T> using\
-    \ WGraph = vector<vector<edge<T>>>;\nconst int INF = 1 << 30;\nconst ll LINF =\
-    \ 1LL << 60;\nconst int MOD = 1e9 + 7;\nconst char newl = '\\n';\ntemplate <class\
-    \ T> inline vector<T> make_vec(size_t a, T val) {\n    return vector<T>(a, val);\n\
-    }\ntemplate <class... Ts> inline auto make_vec(size_t a, Ts... ts) {\n    return\
-    \ vector<decltype(make_vec(ts...))>(a, make_vec(ts...));\n}\nvoid read() {}\n\
-    template <class T> inline void read(T &a) { cin >> a; }\ntemplate <class T, class\
-    \ S> inline void read(pair<T, S> &p) {\n    read(p.first), read(p.second);\n}\n\
-    template <class T> inline void read(vector<T> &v) {\n    for(auto &&a : v)\n \
-    \       read(a);\n}\ntemplate <class Head, class... Tail>\ninline void read(Head\
+    \ DOUBLE(...)                                                            \\\n\
+    \    double __VA_ARGS__;                                                     \
+    \   \\\n    read(__VA_ARGS__)\n#define CHAR(...)                             \
+    \                                 \\\n    char __VA_ARGS__;                  \
+    \                                        \\\n    read(__VA_ARGS__)\n#define STRING(...)\
+    \                                                            \\\n    string __VA_ARGS__;\
+    \                                                        \\\n    read(__VA_ARGS__)\n\
+    #define VEC(type, name, size)                                                \
+    \  \\\n    vector<type> name(size);                                          \
+    \         \\\n    read(name)\n#define VEC2(type, name, height, width)        \
+    \                                \\\n    vector<vector<type>> name(height, vector<type>(width));\
+    \                    \\\n    read(name)\nusing namespace std;\nusing ll = long\
+    \ long;\nusing pii = pair<int, int>;\nusing pll = pair<ll, ll>;\nusing Graph =\
+    \ vector<vector<int>>;\ntemplate <typename T> struct edge {\n    int from, to;\n\
+    \    T cost;\n    edge(int f, int t, T c) : from(f), to(t), cost(c) {}\n};\ntemplate\
+    \ <typename T> using WGraph = vector<vector<edge<T>>>;\nconst int INF = 1 << 30;\n\
+    const ll LINF = 1LL << 60;\nconst int MOD = 1e9 + 7;\nconst char newl = '\\n';\n\
+    template <class T> inline vector<T> make_vec(size_t a, T val) {\n    return vector<T>(a,\
+    \ val);\n}\ntemplate <class... Ts> inline auto make_vec(size_t a, Ts... ts) {\n\
+    \    return vector<decltype(make_vec(ts...))>(a, make_vec(ts...));\n}\nvoid read()\
+    \ {}\ntemplate <class T> inline void read(T &a) { cin >> a; }\ntemplate <class\
+    \ T, class S> inline void read(pair<T, S> &p) {\n    read(p.first), read(p.second);\n\
+    }\ntemplate <class T> inline void read(vector<T> &v) {\n    for(auto &&a : v)\n\
+    \        read(a);\n}\ntemplate <class Head, class... Tail>\ninline void read(Head\
     \ &head, Tail &...tail) {\n    read(head), read(tail...);\n}\ntemplate <class\
     \ T> void write(const T &a) { cout << a << '\\n'; }\ntemplate <class T> void write(const\
     \ vector<T> &a) {\n    for(int i = 0; i < a.size(); i++)\n        cout << a[i]\
@@ -214,8 +214,8 @@ data:
   isVerificationFile: true
   path: verify/inv_of_formal_power_series.test.cpp
   requiredBy: []
-  timestamp: '2021-05-20 17:39:02+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2021-05-20 17:44:33+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/inv_of_formal_power_series.test.cpp
 layout: document

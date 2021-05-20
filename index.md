@@ -67,7 +67,7 @@ data:
     - icon: ':warning:'
       path: Math/ComvolutionFFT.cc
       title: Math/ComvolutionFFT.cc
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Math/Convolution.cc
       title: Math/Convolution.cc
     - icon: ':warning:'
@@ -76,7 +76,7 @@ data:
     - icon: ':warning:'
       path: Math/Determinant.cc
       title: Math/Determinant.cc
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Math/FormalPowerSeries.cc
       title: Math/FormalPowerSeries.cc
     - icon: ':warning:'
@@ -89,7 +89,7 @@ data:
     - icon: ':warning:'
       path: Math/Matrix.cc
       title: Math/Matrix.cc
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Math/ModInt.cc
       title: Math/ModInt.cc
   - name: Others
@@ -97,7 +97,7 @@ data:
     - icon: ':warning:'
       path: Others/Compress.cc
       title: "\u5EA7\u6A19\u5727\u7E2E"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Others/template.cc
       title: Others/template.cc
   - name: String
@@ -120,7 +120,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/convolution_mod.test.cpp
       title: verify/convolution_mod.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/inv_of_formal_power_series.test.cpp
       title: verify/inv_of_formal_power_series.test.cpp
     - icon: ':heavy_check_mark:'
