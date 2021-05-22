@@ -45,11 +45,17 @@ data:
       path: Graph/FordFulkerson.cc
       title: Graph/FordFulkerson.cc
     - icon: ':warning:'
+      path: Graph/Graph.cc
+      title: Graph/Graph.cc
+    - icon: ':warning:'
       path: Graph/HLDecomposition.cc
       title: Graph/HLDecomposition.cc
     - icon: ':warning:'
       path: Graph/LowestCommonAncestor.cc
       title: Graph/LowestCommonAncestor.cc
+    - icon: ':warning:'
+      path: Graph/Lowlink.cc
+      title: Graph/Lowlink.cc
     - icon: ':warning:'
       path: Graph/Scc.cc
       title: Graph/Scc.cc

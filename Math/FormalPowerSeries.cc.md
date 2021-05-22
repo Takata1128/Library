@@ -55,18 +55,18 @@ data:
     \    assert(d >= 0);\n        F ret({Mint(1) / (*this)[0]});\n        for(int\
     \ i = 1; i < d; i <<= 1) {\n            ret = (ret * 2 - ret * ret * pre(i <<\
     \ 1)).pre(i << 1);\n        }\n        return ret.pre(d);\n    }\n\n    // multiply\
-    \ and divide (1+cz^d)\n    void multiply(const int d, const Mint c) {\n      \
-    \  int n = this->size();\n        if(c == Mint(1))\n            for(int i = n\
-    \ - d; i >= 0; i--)\n                (*this)[i + d] += (*this)[i];\n        else\
-    \ if(c == Mint(-1))\n            for(int i = n - d; i >= 0; i--)\n           \
-    \     (*this)[i + d] -= (*this)[i];\n        else\n            for(int i = n -\
-    \ d; i >= 0; i--)\n                (*this)[i + d] += (*this)[i] * c;\n    }\n\
-    \    void divide(const int d, const Mint c) {\n        int n = this->size();\n\
-    \        if(c == Mint(1))\n            for(int i = 0; i < n - d; i++)\n      \
-    \          (*this)[i + d] -= (*this)[i];\n        else if(c == Mint(-1))\n   \
-    \         for(int i = 0; i < n - d; i++)\n                (*this)[i + d] += (*this)[i];\n\
-    \        else\n            for(int i = 0; i < n - d; i++)\n                (*this)[i\
-    \ + d] -= (*this)[i] * c;\n    }\n};\n"
+    \ and divide (1+cz^d)\n    // !! abort at n items !!\n    void multiply(const\
+    \ int d, const Mint c) {\n        int n = this->size();\n        if(c == Mint(1))\n\
+    \            for(int i = n - d; i >= 0; i--)\n                (*this)[i + d] +=\
+    \ (*this)[i];\n        else if(c == Mint(-1))\n            for(int i = n - d;\
+    \ i >= 0; i--)\n                (*this)[i + d] -= (*this)[i];\n        else\n\
+    \            for(int i = n - d; i >= 0; i--)\n                (*this)[i + d] +=\
+    \ (*this)[i] * c;\n    }\n    void divide(const int d, const Mint c) {\n     \
+    \   int n = this->size();\n        if(c == Mint(1))\n            for(int i = 0;\
+    \ i < n - d; i++)\n                (*this)[i + d] -= (*this)[i];\n        else\
+    \ if(c == Mint(-1))\n            for(int i = 0; i < n - d; i++)\n            \
+    \    (*this)[i + d] += (*this)[i];\n        else\n            for(int i = 0; i\
+    \ < n - d; i++)\n                (*this)[i + d] -= (*this)[i] * c;\n    }\n};\n"
   code: "#include <bits/stdc++.h>\nusing namespace std;\n\ntemplate <typename Mint>\
     \ struct FormalPowerSeries : public vector<Mint> {\n    using vector<Mint>::vector;\n\
     \    using F = FormalPowerSeries<Mint>;\n    using CONV = function<vector<Mint>(vector<Mint>,\
@@ -111,23 +111,23 @@ data:
     \    assert(d >= 0);\n        F ret({Mint(1) / (*this)[0]});\n        for(int\
     \ i = 1; i < d; i <<= 1) {\n            ret = (ret * 2 - ret * ret * pre(i <<\
     \ 1)).pre(i << 1);\n        }\n        return ret.pre(d);\n    }\n\n    // multiply\
-    \ and divide (1+cz^d)\n    void multiply(const int d, const Mint c) {\n      \
-    \  int n = this->size();\n        if(c == Mint(1))\n            for(int i = n\
-    \ - d; i >= 0; i--)\n                (*this)[i + d] += (*this)[i];\n        else\
-    \ if(c == Mint(-1))\n            for(int i = n - d; i >= 0; i--)\n           \
-    \     (*this)[i + d] -= (*this)[i];\n        else\n            for(int i = n -\
-    \ d; i >= 0; i--)\n                (*this)[i + d] += (*this)[i] * c;\n    }\n\
-    \    void divide(const int d, const Mint c) {\n        int n = this->size();\n\
-    \        if(c == Mint(1))\n            for(int i = 0; i < n - d; i++)\n      \
-    \          (*this)[i + d] -= (*this)[i];\n        else if(c == Mint(-1))\n   \
-    \         for(int i = 0; i < n - d; i++)\n                (*this)[i + d] += (*this)[i];\n\
-    \        else\n            for(int i = 0; i < n - d; i++)\n                (*this)[i\
-    \ + d] -= (*this)[i] * c;\n    }\n};\n"
+    \ and divide (1+cz^d)\n    // !! abort at n items !!\n    void multiply(const\
+    \ int d, const Mint c) {\n        int n = this->size();\n        if(c == Mint(1))\n\
+    \            for(int i = n - d; i >= 0; i--)\n                (*this)[i + d] +=\
+    \ (*this)[i];\n        else if(c == Mint(-1))\n            for(int i = n - d;\
+    \ i >= 0; i--)\n                (*this)[i + d] -= (*this)[i];\n        else\n\
+    \            for(int i = n - d; i >= 0; i--)\n                (*this)[i + d] +=\
+    \ (*this)[i] * c;\n    }\n    void divide(const int d, const Mint c) {\n     \
+    \   int n = this->size();\n        if(c == Mint(1))\n            for(int i = 0;\
+    \ i < n - d; i++)\n                (*this)[i + d] -= (*this)[i];\n        else\
+    \ if(c == Mint(-1))\n            for(int i = 0; i < n - d; i++)\n            \
+    \    (*this)[i + d] += (*this)[i];\n        else\n            for(int i = 0; i\
+    \ < n - d; i++)\n                (*this)[i + d] -= (*this)[i] * c;\n    }\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: Math/FormalPowerSeries.cc
   requiredBy: []
-  timestamp: '2021-05-20 17:44:33+09:00'
+  timestamp: '2021-05-22 20:11:13+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/inv_of_formal_power_series.test.cpp
