@@ -5,26 +5,26 @@
 #define ALL(v) (v).begin(), (v).end()
 #define LLA(v) (v).rbegin(), (v).rend()
 #define SZ(v) (int)(v).size()
-#define INT(...)                                                               \
-    int __VA_ARGS__;                                                           \
+#define INT(...)     \
+    int __VA_ARGS__; \
     read(__VA_ARGS__)
-#define LL(...)                                                                \
-    ll __VA_ARGS__;                                                            \
+#define LL(...)     \
+    ll __VA_ARGS__; \
     read(__VA_ARGS__)
-#define DOUBLE(...)                                                            \
-    double __VA_ARGS__;                                                        \
+#define DOUBLE(...)     \
+    double __VA_ARGS__; \
     read(__VA_ARGS__)
-#define CHAR(...)                                                              \
-    char __VA_ARGS__;                                                          \
+#define CHAR(...)     \
+    char __VA_ARGS__; \
     read(__VA_ARGS__)
-#define STRING(...)                                                            \
-    string __VA_ARGS__;                                                        \
+#define STRING(...)     \
+    string __VA_ARGS__; \
     read(__VA_ARGS__)
-#define VEC(type, name, size)                                                  \
-    vector<type> name(size);                                                   \
+#define VEC(type, name, size) \
+    vector<type> name(size);  \
     read(name)
-#define VEC2(type, name, height, width)                                        \
-    vector<vector<type>> name(height, vector<type>(width));                    \
+#define VEC2(type, name, height, width)                     \
+    vector<vector<type>> name(height, vector<type>(width)); \
     read(name)
 using namespace std;
 using ll = long long;
@@ -61,6 +61,9 @@ inline void read(Head &head, Tail &...tail) {
     read(head), read(tail...);
 }
 template <class T> void write(const T &a) { cout << a << '\n'; }
+template <class T, class S> void write(const pair<T, S> &a) {
+    cout << a.first << ' ' << a.second << '\n';
+}
 template <class T> void write(const vector<T> &a) {
     for(int i = 0; i < a.size(); i++)
         cout << a[i] << (i + 1 == a.size() ? '\n' : ' ');
@@ -70,10 +73,22 @@ void write(const Head &head, const Tail &...tail) {
     cout << head << ' ';
     write(tail...);
 }
-template <class T> void writel(const T &a) { cout << a << '\n'; }
+template <class T> void debug(const T &a) { cerr << a << '\n'; }
+template <class T, class S> void debug(const pair<T, S> &a) {
+    cerr << a.first << ' ' << a.second << '\n';
+}
+template <class T> void debug(const vector<T> &a) {
+    for(int i = 0; i < a.size(); i++)
+        cerr << a[i] << (i + 1 == a.size() ? '\n' : ' ');
+}
+template <class Head, class... Tail>
+void debug(const Head &head, const Tail &...tail) {
+    cerr << head << ' ';
+    debug(tail...);
+}
 template <class T> void writel(const vector<T> &a) {
     for(int i = 0; i < a.size(); i++)
-        cout << a[i] << '\n';
+        write(a[i]);
 }
 template <class Head, class... Tail>
 void writel(const Head &head, const Tail &...tail) {

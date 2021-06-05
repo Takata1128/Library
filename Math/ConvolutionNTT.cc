@@ -2,77 +2,88 @@
 using namespace std;
 using ll = long long;
 
-template <int MOD = 998244353, int primroot = 3> class ConvolutionNTT {
+template <typename Mint> class Convolution {
   private:
-    vector<ll> a, b;
-    ll modpow(ll v, ll n) {
-        ll x = 1, p = v;
-        while(n > 0) {
-            if(n % 2 == 0) {
-                p = (p * p) % MOD;
-                n /= 2;
-            } else {
-                x = (x * p) % MOD;
-                n--;
-            }
-        }
-        return x;
+    constexpr int primroot(int p) {
+        if(p == 2)
+            return 1;
+        if(p == 167772161)
+            return 3;
+        if(p == 469762049)
+            return 3;
+        if(p == 754974721)
+            return 11;
+        if(p == 998244353)
+            return 3;
+        assert(false);
     }
-    ll modinv(ll v) { return modpow(v, MOD - 2); }
 
   public:
-    ConvolutionNTT(vector<ll> &_a, vector<ll> &_b) {
-        a = _a;
-        b = _b;
-    }
+    void _ntt(vector<Mint> &a, bool is_inverse) {
+        const int n = a.size();
+        const int mod = Mint::get_mod();
+        const int g = primroot(mod);
+        assert((n ^ (n & -n)) == 0);
+        Mint h = Mint(g).pow((mod - 1) / n);
+        h = (is_inverse ? h.inv() : h);
 
-    vector<ll> ntt_rec(vector<ll> a, bool is_inverse = false) {
-        int n = a.size();
-        if(n == 1)
-            return a;
-        vector<ll> f0(n / 2), f1(n / 2);
-        for(int i = 0; i < (n / 2); i++) {
-            f0[i] = (a[i * 2]);
-            f1[i] = (a[i * 2 + 1]);
+        int i = 0;
+        for(int j = 1; j < n - 1; j++) {
+            for(int k = n >> 1; k > (i ^= k); k >>= 1)
+                ;
+            if(j < i)
+                swap(a[i], a[j]);
         }
-        f0 = ntt_rec(f0, is_inverse), f1 = ntt_rec(f1, is_inverse);
-        ll zeta = modpow(is_inverse ? modinv(primroot) : primroot, MOD / n);
-        ll pow_zeta = 1;
-        for(int i = 0; i < n; i++) {
-            a[i] = (f0[i % (n / 2)] + pow_zeta * f1[i % (n / 2)]) % MOD;
-            pow_zeta *= zeta;
-            pow_zeta %= MOD;
-        }
-        return a;
-    }
 
-    vector<ll> ntt(vector<ll> a, bool is_inverse) {
-        vector<ll> ret = ntt_rec(a, is_inverse);
-        int n = ret.size();
-        if(is_inverse) {
-            for(int i = 0; i < n; i++) {
-                ret[i] *= modinv(n);
-                ret[i] %= MOD;
+        for(int m = 1; m < n; m *= 2) {
+            const int m2 = 2 * m;
+            const Mint base = h.pow(n / m2);
+            Mint w = 1;
+            for(int x = 0; x < m; x++) {
+                for(int s = x; s < n; s += m2) {
+                    Mint u = a[s];
+                    Mint d = a[s + m] * w;
+                    a[s] = u + d;
+                    a[s + m] = u - d;
+                }
+                w *= base;
             }
         }
-        return ret;
     }
 
-    vector<ll> convolve() {
-        int s = a.size() + b.size() - 1;
+    void ntt(vector<Mint> &a) { _ntt(a, false); }
+    void intt(vector<Mint> &a) {
+        _ntt(a, true);
+        int n = a.size();
+        Mint n_inv = Mint(n).inv();
+        for(auto &x : a)
+            x *= n_inv;
+    }
+
+    vector<Mint> convolution(const vector<Mint> &_a, const vector<Mint> &_b) {
+        vector<Mint> a(_a), b(_b);
+        int s = a.size() + b.size();
         int t = 1;
         while(t < s)
             t *= 2;
         a.resize(t);
         b.resize(t);
-
-        vector<ll> A = ntt(a, false);
-        vector<ll> B = ntt(b, false);
-        vector<ll> C(t);
+        ntt(a);
+        ntt(b);
         for(int i = 0; i < t; i++) {
-            C[i] = (A[i] * B[i]) % MOD;
+            a[i] *= b[i];
         }
-        C = ntt(C, true);
-        return C;
+        intt(a);
+        return a;
+    }
+
+    template <typename T>
+    vector<Mint> convolution(const vector<T> &_a, const vector<T> &_b) {
+        vector<Mint> a(_a.size()), b(_b.size());
+        for(int i = 0; i < a.size(); i++)
+            a[i] = _a[i];
+        for(int i = 0; i < b.size(); i++)
+            b[i] = _b[i];
+        return convolution(a, b);
     }
 };
