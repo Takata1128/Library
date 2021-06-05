@@ -2,13 +2,10 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: verify/inv_of_formal_power_series.test.cpp
-    title: verify/inv_of_formal_power_series.test.cpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: cc
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
   bundledCode: "#line 1 \"Math/FormalPowerSeries.cc\"\n#include <bits/stdc++.h>\n\
@@ -128,9 +125,8 @@ data:
   path: Math/FormalPowerSeries.cc
   requiredBy: []
   timestamp: '2021-05-22 20:11:13+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - verify/inv_of_formal_power_series.test.cpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: Math/FormalPowerSeries.cc
 layout: document
 redirect_from:

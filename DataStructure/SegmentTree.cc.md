@@ -2,13 +2,10 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: verify/staticrmq.test.cpp
-    title: verify/staticrmq.test.cpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: cc
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
   bundledCode: "#line 1 \"DataStructure/SegmentTree.cc\"\n#include <bits/stdc++.h>\n\
@@ -95,9 +92,8 @@ data:
   path: DataStructure/SegmentTree.cc
   requiredBy: []
   timestamp: '2021-05-05 18:59:48+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - verify/staticrmq.test.cpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: DataStructure/SegmentTree.cc
 layout: document
 redirect_from:

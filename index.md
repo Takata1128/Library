@@ -15,10 +15,10 @@ data:
     - icon: ':warning:'
       path: DataStructure/LazySegmentTree.cc
       title: DataStructure/LazySegmentTree.cc
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: DataStructure/SegmentTree.cc
       title: DataStructure/SegmentTree.cc
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: DataStructure/SegmentTreeBeats.cc
       title: DataStructure/SegmentTreeBeats.cc
     - icon: ':warning:'
@@ -27,7 +27,7 @@ data:
     - icon: ':warning:'
       path: DataStructure/SqrtDecomposition.cc
       title: DataStructure/SqrtDecomposition.cc
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: DataStructure/UnionFind.cc
       title: DataStructure/UnionFind.cc
   - name: Graph
@@ -71,20 +71,20 @@ data:
       path: Math/Combination.cc
       title: Math/Combination.cc
     - icon: ':warning:'
-      path: Math/ComvolutionFFT.cc
-      title: Math/ComvolutionFFT.cc
-    - icon: ':heavy_check_mark:'
-      path: Math/Convolution.cc
-      title: Math/Convolution.cc
+      path: Math/ConvolutionFFT.cc
+      title: Math/ConvolutionFFT.cc
     - icon: ':warning:'
       path: Math/ConvolutionNTT.cc
       title: Math/ConvolutionNTT.cc
     - icon: ':warning:'
       path: Math/Determinant.cc
       title: Math/Determinant.cc
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: Math/FormalPowerSeries.cc
       title: Math/FormalPowerSeries.cc
+    - icon: ':warning:'
+      path: Math/GaussianElimination.cc
+      title: Math/GaussianElimination.cc
     - icon: ':warning:'
       path: Math/Geometry.cc
       title: Math/Geometry.cc
@@ -95,7 +95,7 @@ data:
     - icon: ':warning:'
       path: Math/Matrix.cc
       title: Math/Matrix.cc
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: Math/ModInt.cc
       title: Math/ModInt.cc
   - name: Others
@@ -103,9 +103,9 @@ data:
     - icon: ':warning:'
       path: Others/Compress.cc
       title: "\u5EA7\u6A19\u5727\u7E2E"
-    - icon: ':heavy_check_mark:'
-      path: Others/template.cc
-      title: Others/template.cc
+    - icon: ':warning:'
+      path: Others/cp-template.cc
+      title: Others/cp-template.cc
   - name: String
     pages:
     - icon: ':warning:'
@@ -123,19 +123,19 @@ data:
   verificationCategories:
   - name: verify
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/convolution_mod.test.cpp
       title: verify/convolution_mod.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/inv_of_formal_power_series.test.cpp
       title: verify/inv_of_formal_power_series.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/range_chmin_chmax_add_range_sum.test.cpp
       title: verify/range_chmin_chmax_add_range_sum.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/staticrmq.test.cpp
       title: verify/staticrmq.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/unionfind.test.cpp
       title: verify/unionfind.test.cpp
 layout: toppage

@@ -2,13 +2,10 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: verify/unionfind.test.cpp
-    title: verify/unionfind.test.cpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: cc
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
   bundledCode: "#line 1 \"DataStructure/UnionFind.cc\"\n#include <bits/stdc++.h>\r\
@@ -71,9 +68,8 @@ data:
   path: DataStructure/UnionFind.cc
   requiredBy: []
   timestamp: '2021-05-05 18:25:11+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - verify/unionfind.test.cpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: DataStructure/UnionFind.cc
 layout: document
 redirect_from:

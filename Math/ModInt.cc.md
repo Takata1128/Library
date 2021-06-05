@@ -2,16 +2,10 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: verify/convolution_mod.test.cpp
-    title: verify/convolution_mod.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/inv_of_formal_power_series.test.cpp
-    title: verify/inv_of_formal_power_series.test.cpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: cc
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
   bundledCode: "#line 1 \"Math/ModInt.cc\"\n#include <bits/stdc++.h>\r\nusing namespace\
@@ -80,10 +74,8 @@ data:
   path: Math/ModInt.cc
   requiredBy: []
   timestamp: '2021-05-09 19:12:16+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - verify/convolution_mod.test.cpp
-  - verify/inv_of_formal_power_series.test.cpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: Math/ModInt.cc
 layout: document
 redirect_from:

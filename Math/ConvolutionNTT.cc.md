@@ -9,65 +9,73 @@ data:
   attributes:
     links: []
   bundledCode: "#line 1 \"Math/ConvolutionNTT.cc\"\n#include <bits/stdc++.h>\nusing\
-    \ namespace std;\nusing ll = long long;\n\ntemplate <int MOD = 998244353, int\
-    \ primroot = 3> class ConvolutionNTT {\n  private:\n    vector<ll> a, b;\n   \
-    \ ll modpow(ll v, ll n) {\n        ll x = 1, p = v;\n        while(n > 0) {\n\
-    \            if(n % 2 == 0) {\n                p = (p * p) % MOD;\n          \
-    \      n /= 2;\n            } else {\n                x = (x * p) % MOD;\n   \
-    \             n--;\n            }\n        }\n        return x;\n    }\n    ll\
-    \ modinv(ll v) { return modpow(v, MOD - 2); }\n\n  public:\n    ConvolutionNTT(vector<ll>\
-    \ &_a, vector<ll> &_b) {\n        a = _a;\n        b = _b;\n    }\n\n    vector<ll>\
-    \ ntt_rec(vector<ll> a, bool is_inverse = false) {\n        int n = a.size();\n\
-    \        if(n == 1)\n            return a;\n        vector<ll> f0(n / 2), f1(n\
-    \ / 2);\n        for(int i = 0; i < (n / 2); i++) {\n            f0[i] = (a[i\
-    \ * 2]);\n            f1[i] = (a[i * 2 + 1]);\n        }\n        f0 = ntt_rec(f0,\
-    \ is_inverse), f1 = ntt_rec(f1, is_inverse);\n        ll zeta = modpow(is_inverse\
-    \ ? modinv(primroot) : primroot, MOD / n);\n        ll pow_zeta = 1;\n       \
-    \ for(int i = 0; i < n; i++) {\n            a[i] = (f0[i % (n / 2)] + pow_zeta\
-    \ * f1[i % (n / 2)]) % MOD;\n            pow_zeta *= zeta;\n            pow_zeta\
-    \ %= MOD;\n        }\n        return a;\n    }\n\n    vector<ll> ntt(vector<ll>\
-    \ a, bool is_inverse) {\n        vector<ll> ret = ntt_rec(a, is_inverse);\n  \
-    \      int n = ret.size();\n        if(is_inverse) {\n            for(int i =\
-    \ 0; i < n; i++) {\n                ret[i] *= modinv(n);\n                ret[i]\
-    \ %= MOD;\n            }\n        }\n        return ret;\n    }\n\n    vector<ll>\
-    \ convolve() {\n        int s = a.size() + b.size() - 1;\n        int t = 1;\n\
-    \        while(t < s)\n            t *= 2;\n        a.resize(t);\n        b.resize(t);\n\
-    \n        vector<ll> A = ntt(a, false);\n        vector<ll> B = ntt(b, false);\n\
-    \        vector<ll> C(t);\n        for(int i = 0; i < t; i++) {\n            C[i]\
-    \ = (A[i] * B[i]) % MOD;\n        }\n        C = ntt(C, true);\n        return\
-    \ C;\n    }\n};\n"
-  code: "#include <bits/stdc++.h>\nusing namespace std;\nusing ll = long long;\n\n\
-    template <int MOD = 998244353, int primroot = 3> class ConvolutionNTT {\n  private:\n\
-    \    vector<ll> a, b;\n    ll modpow(ll v, ll n) {\n        ll x = 1, p = v;\n\
-    \        while(n > 0) {\n            if(n % 2 == 0) {\n                p = (p\
-    \ * p) % MOD;\n                n /= 2;\n            } else {\n               \
-    \ x = (x * p) % MOD;\n                n--;\n            }\n        }\n       \
-    \ return x;\n    }\n    ll modinv(ll v) { return modpow(v, MOD - 2); }\n\n  public:\n\
-    \    ConvolutionNTT(vector<ll> &_a, vector<ll> &_b) {\n        a = _a;\n     \
-    \   b = _b;\n    }\n\n    vector<ll> ntt_rec(vector<ll> a, bool is_inverse = false)\
-    \ {\n        int n = a.size();\n        if(n == 1)\n            return a;\n  \
-    \      vector<ll> f0(n / 2), f1(n / 2);\n        for(int i = 0; i < (n / 2); i++)\
-    \ {\n            f0[i] = (a[i * 2]);\n            f1[i] = (a[i * 2 + 1]);\n  \
-    \      }\n        f0 = ntt_rec(f0, is_inverse), f1 = ntt_rec(f1, is_inverse);\n\
-    \        ll zeta = modpow(is_inverse ? modinv(primroot) : primroot, MOD / n);\n\
-    \        ll pow_zeta = 1;\n        for(int i = 0; i < n; i++) {\n            a[i]\
-    \ = (f0[i % (n / 2)] + pow_zeta * f1[i % (n / 2)]) % MOD;\n            pow_zeta\
-    \ *= zeta;\n            pow_zeta %= MOD;\n        }\n        return a;\n    }\n\
-    \n    vector<ll> ntt(vector<ll> a, bool is_inverse) {\n        vector<ll> ret\
-    \ = ntt_rec(a, is_inverse);\n        int n = ret.size();\n        if(is_inverse)\
-    \ {\n            for(int i = 0; i < n; i++) {\n                ret[i] *= modinv(n);\n\
-    \                ret[i] %= MOD;\n            }\n        }\n        return ret;\n\
-    \    }\n\n    vector<ll> convolve() {\n        int s = a.size() + b.size() - 1;\n\
+    \ namespace std;\nusing ll = long long;\n\ntemplate <typename Mint> class Convolution\
+    \ {\n  private:\n    constexpr int primroot(int p) {\n        if(p == 2)\n   \
+    \         return 1;\n        if(p == 167772161)\n            return 3;\n     \
+    \   if(p == 469762049)\n            return 3;\n        if(p == 754974721)\n  \
+    \          return 11;\n        if(p == 998244353)\n            return 3;\n   \
+    \     assert(false);\n    }\n\n  public:\n    void _ntt(vector<Mint> &a, bool\
+    \ is_inverse) {\n        const int n = a.size();\n        const int mod = Mint::get_mod();\n\
+    \        const int g = primroot(mod);\n        assert((n ^ (n & -n)) == 0);\n\
+    \        Mint h = Mint(g).pow((mod - 1) / n);\n        h = (is_inverse ? h.inv()\
+    \ : h);\n\n        int i = 0;\n        for(int j = 1; j < n - 1; j++) {\n    \
+    \        for(int k = n >> 1; k > (i ^= k); k >>= 1)\n                ;\n     \
+    \       if(j < i)\n                swap(a[i], a[j]);\n        }\n\n        for(int\
+    \ m = 1; m < n; m *= 2) {\n            const int m2 = 2 * m;\n            const\
+    \ Mint base = h.pow(n / m2);\n            Mint w = 1;\n            for(int x =\
+    \ 0; x < m; x++) {\n                for(int s = x; s < n; s += m2) {\n       \
+    \             Mint u = a[s];\n                    Mint d = a[s + m] * w;\n   \
+    \                 a[s] = u + d;\n                    a[s + m] = u - d;\n     \
+    \           }\n                w *= base;\n            }\n        }\n    }\n\n\
+    \    void ntt(vector<Mint> &a) { _ntt(a, false); }\n    void intt(vector<Mint>\
+    \ &a) {\n        _ntt(a, true);\n        int n = a.size();\n        Mint n_inv\
+    \ = Mint(n).inv();\n        for(auto &x : a)\n            x *= n_inv;\n    }\n\
+    \n    vector<Mint> convolution(const vector<Mint> &_a, const vector<Mint> &_b)\
+    \ {\n        vector<Mint> a(_a), b(_b);\n        int s = a.size() + b.size();\n\
     \        int t = 1;\n        while(t < s)\n            t *= 2;\n        a.resize(t);\n\
-    \        b.resize(t);\n\n        vector<ll> A = ntt(a, false);\n        vector<ll>\
-    \ B = ntt(b, false);\n        vector<ll> C(t);\n        for(int i = 0; i < t;\
-    \ i++) {\n            C[i] = (A[i] * B[i]) % MOD;\n        }\n        C = ntt(C,\
-    \ true);\n        return C;\n    }\n};\n"
+    \        b.resize(t);\n        ntt(a);\n        ntt(b);\n        for(int i = 0;\
+    \ i < t; i++) {\n            a[i] *= b[i];\n        }\n        intt(a);\n    \
+    \    return a;\n    }\n\n    template <typename T>\n    vector<Mint> convolution(const\
+    \ vector<T> &_a, const vector<T> &_b) {\n        vector<Mint> a(_a.size()), b(_b.size());\n\
+    \        for(int i = 0; i < a.size(); i++)\n            a[i] = _a[i];\n      \
+    \  for(int i = 0; i < b.size(); i++)\n            b[i] = _b[i];\n        return\
+    \ convolution(a, b);\n    }\n};\n"
+  code: "#include <bits/stdc++.h>\nusing namespace std;\nusing ll = long long;\n\n\
+    template <typename Mint> class Convolution {\n  private:\n    constexpr int primroot(int\
+    \ p) {\n        if(p == 2)\n            return 1;\n        if(p == 167772161)\n\
+    \            return 3;\n        if(p == 469762049)\n            return 3;\n  \
+    \      if(p == 754974721)\n            return 11;\n        if(p == 998244353)\n\
+    \            return 3;\n        assert(false);\n    }\n\n  public:\n    void _ntt(vector<Mint>\
+    \ &a, bool is_inverse) {\n        const int n = a.size();\n        const int mod\
+    \ = Mint::get_mod();\n        const int g = primroot(mod);\n        assert((n\
+    \ ^ (n & -n)) == 0);\n        Mint h = Mint(g).pow((mod - 1) / n);\n        h\
+    \ = (is_inverse ? h.inv() : h);\n\n        int i = 0;\n        for(int j = 1;\
+    \ j < n - 1; j++) {\n            for(int k = n >> 1; k > (i ^= k); k >>= 1)\n\
+    \                ;\n            if(j < i)\n                swap(a[i], a[j]);\n\
+    \        }\n\n        for(int m = 1; m < n; m *= 2) {\n            const int m2\
+    \ = 2 * m;\n            const Mint base = h.pow(n / m2);\n            Mint w =\
+    \ 1;\n            for(int x = 0; x < m; x++) {\n                for(int s = x;\
+    \ s < n; s += m2) {\n                    Mint u = a[s];\n                    Mint\
+    \ d = a[s + m] * w;\n                    a[s] = u + d;\n                    a[s\
+    \ + m] = u - d;\n                }\n                w *= base;\n            }\n\
+    \        }\n    }\n\n    void ntt(vector<Mint> &a) { _ntt(a, false); }\n    void\
+    \ intt(vector<Mint> &a) {\n        _ntt(a, true);\n        int n = a.size();\n\
+    \        Mint n_inv = Mint(n).inv();\n        for(auto &x : a)\n            x\
+    \ *= n_inv;\n    }\n\n    vector<Mint> convolution(const vector<Mint> &_a, const\
+    \ vector<Mint> &_b) {\n        vector<Mint> a(_a), b(_b);\n        int s = a.size()\
+    \ + b.size();\n        int t = 1;\n        while(t < s)\n            t *= 2;\n\
+    \        a.resize(t);\n        b.resize(t);\n        ntt(a);\n        ntt(b);\n\
+    \        for(int i = 0; i < t; i++) {\n            a[i] *= b[i];\n        }\n\
+    \        intt(a);\n        return a;\n    }\n\n    template <typename T>\n   \
+    \ vector<Mint> convolution(const vector<T> &_a, const vector<T> &_b) {\n     \
+    \   vector<Mint> a(_a.size()), b(_b.size());\n        for(int i = 0; i < a.size();\
+    \ i++)\n            a[i] = _a[i];\n        for(int i = 0; i < b.size(); i++)\n\
+    \            b[i] = _b[i];\n        return convolution(a, b);\n    }\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: Math/ConvolutionNTT.cc
   requiredBy: []
-  timestamp: '2021-05-05 18:25:11+09:00'
+  timestamp: '2021-06-05 15:25:05+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: Math/ConvolutionNTT.cc
