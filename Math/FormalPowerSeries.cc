@@ -118,6 +118,7 @@ template <typename Mint> struct FormalPowerSeries : public vector<Mint> {
     }
 
     // multiply and divide (1+cz^d)
+    // !! abort at n items !!
     void multiply(const int d, const Mint c) {
         int n = this->size();
         if(c == Mint(1))
