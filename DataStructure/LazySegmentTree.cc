@@ -107,17 +107,17 @@ template <class S, class F> class LazySegTree {
         do {
             while(l % 2 == 0)
                 l >>= 1;
-            if(!f(op(cum, dat[l]))) {
+            if(!f(op(cum, node[l]))) {
                 while(l < n) {
                     l = 2 * l;
-                    if(f(op(cum, dat[l]))) {
-                        cum = op(cum, dat[l]);
+                    if(f(op(cum, node[l]))) {
+                        cum = op(cum, node[l]);
                         l++;
                     }
                 }
                 return l - n;
             }
-            cum = op(cum, dat[l]);
+            cum = op(cum, node[l]);
             l++;
         } while((l & -l) != l);
         return org_size;
@@ -134,17 +134,17 @@ template <class S, class F> class LazySegTree {
             r--;
             while(r > 1 && (r % 2))
                 r >>= 1;
-            if(!f(op(dat[r], cum))) {
+            if(!f(op(node[r], cum))) {
                 while(r < n) {
                     r = 2 * r + 1;
-                    if(f(op(dat[r], cum))) {
-                        cum = op(dat[r], cum);
+                    if(f(op(node[r], cum))) {
+                        cum = op(node[r], cum);
                         r--;
                     }
                 }
                 return r + 1 - n;
             }
-            cum = op(dat[r], cum);
+            cum = op(node[r], cum);
         } while((r & (-r) != r));
         return 0;
     }
@@ -175,7 +175,6 @@ template <class S, class F> class LazySegTree {
         build();
     }
 };
-
 struct S {};
 struct F {};
 S op(S a, S b){};

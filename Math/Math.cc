@@ -112,9 +112,8 @@ long long mod_inv(long long a, long long mod) {
     return u;
 }
 
-std::pair<long long, long long>
-crt2(const std::pair<long long, long long> &rm1,
-     const std::pair<long long, long long> &rm2) {
+std::pair<long long, long long> crt2(const std::pair<long long, long long> &rm1,
+                                     const std::pair<long long, long long> &rm2) {
     long long p, q;
     auto [r1, m1] = rm1;
     auto [r2, m2] = rm2;
@@ -167,6 +166,7 @@ long long garner_mod(std::vector<std::pair<long long, long long>> rm,
             (coffs[j] *= m) %= rm[j].second;
         }
     }
+    return constants.back();
 }
 
 long long floor_div(long long a, long long b) {
@@ -181,14 +181,6 @@ long long ceil_div(long long a, long long b) {
     if(b < 0)
         a = -a, b = -b;
     return a >= 0 ? (a + b - 1) / b : a / b;
-}
-// left_most_bit
-long long lmb(long long x) {
-    long long a = 1;
-    while(a <= x) {
-        a *= 2;
-    }
-    return a / 2;
 }
 
 int bit_length(long long x) {
@@ -225,3 +217,5 @@ long long count_multiple(long long left, long long right, long long d) {
 }
 
 }; // namespace math
+
+using namespace math;

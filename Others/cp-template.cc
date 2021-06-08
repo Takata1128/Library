@@ -122,3 +122,15 @@ struct IO {
     }
 } io;
 #pragma endregion
+
+void solve() {
+    $1
+}
+
+int main() {
+    // INT(t);
+    int t = 1;
+    while(t--) {
+        solve();
+    }
+}
