@@ -56,7 +56,9 @@ data:
     \ T, class U> inline bool chmin(T &a, U b) {\n    if(a > b) {\n        a = b;\n\
     \        return 1;\n    }\n    return 0;\n}\nstruct IO {\n    IO() {\n       \
     \ ios::sync_with_stdio(false);\n        cin.tie(nullptr);\n        cout << fixed\
-    \ << setprecision(10);\n    }\n} io;\n#pragma endregion\n"
+    \ << setprecision(10);\n    }\n} io;\n#pragma endregion\n\nvoid solve() {\n  \
+    \  $1\n}\n\nint main() {\n    // INT(t);\n    int t = 1;\n    while(t--) {\n \
+    \       solve();\n    }\n}\n"
   code: "#pragma region Macros\n#include <bits/stdc++.h>\n#define rep(i, n) for(int(i)\
     \ = 0; (i) < (n); (i)++)\n#define FOR(i, m, n) for(int(i) = (m); (i) < (n); (i)++)\n\
     #define ALL(v) (v).begin(), (v).end()\n#define LLA(v) (v).rbegin(), (v).rend()\n\
@@ -104,12 +106,14 @@ data:
     \ }\n    return 0;\n}\ntemplate <class T, class U> inline bool chmin(T &a, U b)\
     \ {\n    if(a > b) {\n        a = b;\n        return 1;\n    }\n    return 0;\n\
     }\nstruct IO {\n    IO() {\n        ios::sync_with_stdio(false);\n        cin.tie(nullptr);\n\
-    \        cout << fixed << setprecision(10);\n    }\n} io;\n#pragma endregion\n"
+    \        cout << fixed << setprecision(10);\n    }\n} io;\n#pragma endregion\n\
+    \nvoid solve() {\n    $1\n}\n\nint main() {\n    // INT(t);\n    int t = 1;\n\
+    \    while(t--) {\n        solve();\n    }\n}"
   dependsOn: []
   isVerificationFile: false
   path: Others/cp-template.cc
   requiredBy: []
-  timestamp: '2021-06-05 15:25:05+09:00'
+  timestamp: '2021-06-08 21:09:42+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: Others/cp-template.cc

@@ -44,20 +44,20 @@ data:
     verify!!\n    int max_right(int l, function<bool(S)> f) const {\n        if(l\
     \ == org_size)\n            return org_size;\n        l += n;\n        thrust(l\
     \ / (l & -l));\n        S cum = e;\n        do {\n            while(l % 2 == 0)\n\
-    \                l >>= 1;\n            if(!f(op(cum, dat[l]))) {\n           \
-    \     while(l < n) {\n                    l = 2 * l;\n                    if(f(op(cum,\
-    \ dat[l]))) {\n                        cum = op(cum, dat[l]);\n              \
-    \          l++;\n                    }\n                }\n                return\
-    \ l - n;\n            }\n            cum = op(cum, dat[l]);\n            l++;\n\
+    \                l >>= 1;\n            if(!f(op(cum, node[l]))) {\n          \
+    \      while(l < n) {\n                    l = 2 * l;\n                    if(f(op(cum,\
+    \ node[l]))) {\n                        cum = op(cum, node[l]);\n            \
+    \            l++;\n                    }\n                }\n                return\
+    \ l - n;\n            }\n            cum = op(cum, node[l]);\n            l++;\n\
     \        } while((l & -l) != l);\n        return org_size;\n    }\n\n    // !!\u672A\
     verify!!\n    int min_left(int r, function<bool(S)> f) const {\n        if(r ==\
     \ 0)\n            return 0;\n        r += n;\n        thrust(r / (r & -r) - 1);\n\
     \        S cum = e;\n        do {\n            r--;\n            while(r > 1 &&\
-    \ (r % 2))\n                r >>= 1;\n            if(!f(op(dat[r], cum))) {\n\
+    \ (r % 2))\n                r >>= 1;\n            if(!f(op(node[r], cum))) {\n\
     \                while(r < n) {\n                    r = 2 * r + 1;\n        \
-    \            if(f(op(dat[r], cum))) {\n                        cum = op(dat[r],\
+    \            if(f(op(node[r], cum))) {\n                        cum = op(node[r],\
     \ cum);\n                        r--;\n                    }\n               \
-    \ }\n                return r + 1 - n;\n            }\n            cum = op(dat[r],\
+    \ }\n                return r + 1 - n;\n            }\n            cum = op(node[r],\
     \ cum);\n        } while((r & (-r) != r));\n        return 0;\n    }\n\n    LazySegTree(int\
     \ sz, const Op op, const Mapping mapping,\n                const Composition composition,\
     \ const S &e, const F &oe)\n        : op(op), mapping(mapping), composition(composition),\
@@ -69,7 +69,7 @@ data:
     \ e(e), oe(oe) {\n        org_size = v.size();\n        n = 1;\n        while(n\
     \ < org_size) {\n            n <<= 1;\n        }\n        node.resize(2 * n, e);\n\
     \        lazy.resize(2 * n, oe);\n        for(int i = 0; i < org_size; i++)\n\
-    \            set(i, v[i]);\n        build();\n    }\n};\n\nstruct S {};\nstruct\
+    \            set(i, v[i]);\n        build();\n    }\n};\nstruct S {};\nstruct\
     \ F {};\nS op(S a, S b){};\nS mapping(S a, F f){};\nF composition(F f, F g){};\n\
     S e() {}\nF id() {}\n"
   code: "#include <bits/stdc++.h>\nusing namespace std;\n\ntemplate <class S, class\
@@ -108,23 +108,23 @@ data:
     \ f) const {\n        if(l == org_size)\n            return org_size;\n      \
     \  l += n;\n        thrust(l / (l & -l));\n        S cum = e;\n        do {\n\
     \            while(l % 2 == 0)\n                l >>= 1;\n            if(!f(op(cum,\
-    \ dat[l]))) {\n                while(l < n) {\n                    l = 2 * l;\n\
-    \                    if(f(op(cum, dat[l]))) {\n                        cum = op(cum,\
-    \ dat[l]);\n                        l++;\n                    }\n            \
-    \    }\n                return l - n;\n            }\n            cum = op(cum,\
-    \ dat[l]);\n            l++;\n        } while((l & -l) != l);\n        return\
-    \ org_size;\n    }\n\n    // !!\u672Averify!!\n    int min_left(int r, function<bool(S)>\
-    \ f) const {\n        if(r == 0)\n            return 0;\n        r += n;\n   \
-    \     thrust(r / (r & -r) - 1);\n        S cum = e;\n        do {\n          \
-    \  r--;\n            while(r > 1 && (r % 2))\n                r >>= 1;\n     \
-    \       if(!f(op(dat[r], cum))) {\n                while(r < n) {\n          \
-    \          r = 2 * r + 1;\n                    if(f(op(dat[r], cum))) {\n    \
-    \                    cum = op(dat[r], cum);\n                        r--;\n  \
-    \                  }\n                }\n                return r + 1 - n;\n \
-    \           }\n            cum = op(dat[r], cum);\n        } while((r & (-r) !=\
-    \ r));\n        return 0;\n    }\n\n    LazySegTree(int sz, const Op op, const\
-    \ Mapping mapping,\n                const Composition composition, const S &e,\
-    \ const F &oe)\n        : op(op), mapping(mapping), composition(composition),\
+    \ node[l]))) {\n                while(l < n) {\n                    l = 2 * l;\n\
+    \                    if(f(op(cum, node[l]))) {\n                        cum =\
+    \ op(cum, node[l]);\n                        l++;\n                    }\n   \
+    \             }\n                return l - n;\n            }\n            cum\
+    \ = op(cum, node[l]);\n            l++;\n        } while((l & -l) != l);\n   \
+    \     return org_size;\n    }\n\n    // !!\u672Averify!!\n    int min_left(int\
+    \ r, function<bool(S)> f) const {\n        if(r == 0)\n            return 0;\n\
+    \        r += n;\n        thrust(r / (r & -r) - 1);\n        S cum = e;\n    \
+    \    do {\n            r--;\n            while(r > 1 && (r % 2))\n           \
+    \     r >>= 1;\n            if(!f(op(node[r], cum))) {\n                while(r\
+    \ < n) {\n                    r = 2 * r + 1;\n                    if(f(op(node[r],\
+    \ cum))) {\n                        cum = op(node[r], cum);\n                \
+    \        r--;\n                    }\n                }\n                return\
+    \ r + 1 - n;\n            }\n            cum = op(node[r], cum);\n        } while((r\
+    \ & (-r) != r));\n        return 0;\n    }\n\n    LazySegTree(int sz, const Op\
+    \ op, const Mapping mapping,\n                const Composition composition, const\
+    \ S &e, const F &oe)\n        : op(op), mapping(mapping), composition(composition),\
     \ e(e), oe(oe) {\n        org_size = sz;\n        n = 1;\n        while(n < org_size)\
     \ {\n            n <<= 1;\n        }\n        node.resize(2 * n, e);\n       \
     \ lazy.resize(2 * n, oe);\n    }\n    LazySegTree(const vector<S> &v, const Op\
@@ -133,14 +133,14 @@ data:
     \ e(e), oe(oe) {\n        org_size = v.size();\n        n = 1;\n        while(n\
     \ < org_size) {\n            n <<= 1;\n        }\n        node.resize(2 * n, e);\n\
     \        lazy.resize(2 * n, oe);\n        for(int i = 0; i < org_size; i++)\n\
-    \            set(i, v[i]);\n        build();\n    }\n};\n\nstruct S {};\nstruct\
+    \            set(i, v[i]);\n        build();\n    }\n};\nstruct S {};\nstruct\
     \ F {};\nS op(S a, S b){};\nS mapping(S a, F f){};\nF composition(F f, F g){};\n\
     S e() {}\nF id() {}\n"
   dependsOn: []
   isVerificationFile: false
   path: DataStructure/LazySegmentTree.cc
   requiredBy: []
-  timestamp: '2021-05-05 18:25:11+09:00'
+  timestamp: '2021-06-08 21:09:42+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: DataStructure/LazySegmentTree.cc
