@@ -27,18 +27,18 @@ data:
     \ &operator*=(const ModInt &rhs) {\r\n        val = val * rhs.val % MOD;\r\n \
     \       return *this;\r\n    }\r\n\r\n    constexpr ModInt &operator/=(const ModInt\
     \ &rhs) {\r\n        *this *= rhs.inv();\r\n        return *this;\r\n    }\r\n\
-    \r\n    constexpr bool operator==(const ModInt &rhs) {\r\n        return this->val\
-    \ == rhs.val;\r\n    }\r\n    constexpr bool operator!=(const ModInt &rhs) {\r\
-    \n        return this->val != rhs.val;\r\n    }\r\n    friend constexpr ostream\
-    \ &operator<<(ostream &os, const ModInt<MOD> &x) {\r\n        return os << x.val;\r\
-    \n    }\r\n    friend constexpr istream &operator>>(istream &is, ModInt<MOD> &x)\
-    \ {\r\n        return is >> x.val;\r\n    }\r\n\r\n    constexpr ModInt inv()\
-    \ const { return ModInt(*this).pow(MOD - 2); }\r\n\r\n    constexpr ModInt pow(long\
-    \ long e) const {\r\n        u64 x = 1, p = val;\r\n        while(e > 0) {\r\n\
-    \            if(e % 2 == 0) {\r\n                p = (p * p) % MOD;\r\n      \
-    \          e /= 2;\r\n            } else {\r\n                x = (x * p) % MOD;\r\
-    \n                e--;\r\n            }\r\n        }\r\n        return ModInt(x);\r\
-    \n    }\r\n};\n"
+    \r\n    constexpr bool operator==(const ModInt &rhs) const {\r\n        return\
+    \ this->val == rhs.val;\r\n    }\r\n    constexpr bool operator!=(const ModInt\
+    \ &rhs) const {\r\n        return this->val != rhs.val;\r\n    }\r\n    friend\
+    \ constexpr ostream &operator<<(ostream &os, const ModInt<MOD> &x) {\r\n     \
+    \   return os << x.val;\r\n    }\r\n    friend constexpr istream &operator>>(istream\
+    \ &is, ModInt<MOD> &x) {\r\n        return is >> x.val;\r\n    }\r\n\r\n    constexpr\
+    \ ModInt inv() const { return ModInt(*this).pow(MOD - 2); }\r\n\r\n    constexpr\
+    \ ModInt pow(long long e) const {\r\n        u64 x = 1, p = val;\r\n        while(e\
+    \ > 0) {\r\n            if(e % 2 == 0) {\r\n                p = (p * p) % MOD;\r\
+    \n                e /= 2;\r\n            } else {\r\n                x = (x *\
+    \ p) % MOD;\r\n                e--;\r\n            }\r\n        }\r\n        return\
+    \ ModInt(x);\r\n    }\r\n};\n"
   code: "#include <bits/stdc++.h>\r\nusing namespace std;\r\n/* ModInt */\r\ntemplate\
     \ <uint_fast64_t MOD> class ModInt {\r\n    using u64 = uint_fast64_t;\r\n\r\n\
     \  public:\r\n    u64 val;\r\n\r\n    ModInt(const u64 x = 0) : val((x + MOD)\
@@ -58,9 +58,9 @@ data:
     \        val = val * rhs.val % MOD;\r\n        return *this;\r\n    }\r\n\r\n\
     \    constexpr ModInt &operator/=(const ModInt &rhs) {\r\n        *this *= rhs.inv();\r\
     \n        return *this;\r\n    }\r\n\r\n    constexpr bool operator==(const ModInt\
-    \ &rhs) {\r\n        return this->val == rhs.val;\r\n    }\r\n    constexpr bool\
-    \ operator!=(const ModInt &rhs) {\r\n        return this->val != rhs.val;\r\n\
-    \    }\r\n    friend constexpr ostream &operator<<(ostream &os, const ModInt<MOD>\
+    \ &rhs) const {\r\n        return this->val == rhs.val;\r\n    }\r\n    constexpr\
+    \ bool operator!=(const ModInt &rhs) const {\r\n        return this->val != rhs.val;\r\
+    \n    }\r\n    friend constexpr ostream &operator<<(ostream &os, const ModInt<MOD>\
     \ &x) {\r\n        return os << x.val;\r\n    }\r\n    friend constexpr istream\
     \ &operator>>(istream &is, ModInt<MOD> &x) {\r\n        return is >> x.val;\r\n\
     \    }\r\n\r\n    constexpr ModInt inv() const { return ModInt(*this).pow(MOD\
@@ -73,7 +73,7 @@ data:
   isVerificationFile: false
   path: Math/ModInt.cc
   requiredBy: []
-  timestamp: '2021-05-09 19:12:16+09:00'
+  timestamp: '2021-07-09 20:45:50+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: Math/ModInt.cc

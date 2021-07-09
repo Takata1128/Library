@@ -21,9 +21,10 @@ data:
     \     for(int col2 = 0; col2 < n; col2++) {\n                mat[rank][col2] =\
     \ mat[rank][col2] / mat[rank][col];\n            }\n            for(int row =\
     \ 0; row < m; row++) {\n                if(row != rank && mat[row][col]) {\n \
-    \                   for(int col2 = 0; col2 < n; col2++) {\n                  \
-    \      mat[row][col2] -= mat[rank][col2] / mat[row][col];\n                  \
-    \  }\n                }\n            }\n        }\n    }\n};\n"
+    \                   auto f = mat[row][col];\n                    for(int col2\
+    \ = 0; col2 < n; col2++) {\n                        mat[row][col2] -= mat[rank][col2]\
+    \ * f;\n                    }\n                }\n            }\n            ++rank;\n\
+    \        }\n        return rank;\n    }\n};\n"
   code: "#include <bits/stdc++.h>\nusing namespace std;\n\ntemplate <typename T> class\
     \ GaussianElimination {\n    vector<vector<T>> mat;\n\n  public:\n    GaussianElimination(vector<vector<int>>\
     \ mat(n, vector<T>(m))) : mat(mat) {}\n\n    int sweep(bool is_extended = false)\
@@ -36,14 +37,15 @@ data:
     \     for(int col2 = 0; col2 < n; col2++) {\n                mat[rank][col2] =\
     \ mat[rank][col2] / mat[rank][col];\n            }\n            for(int row =\
     \ 0; row < m; row++) {\n                if(row != rank && mat[row][col]) {\n \
-    \                   for(int col2 = 0; col2 < n; col2++) {\n                  \
-    \      mat[row][col2] -= mat[rank][col2] / mat[row][col];\n                  \
-    \  }\n                }\n            }\n        }\n    }\n};"
+    \                   auto f = mat[row][col];\n                    for(int col2\
+    \ = 0; col2 < n; col2++) {\n                        mat[row][col2] -= mat[rank][col2]\
+    \ * f;\n                    }\n                }\n            }\n            ++rank;\n\
+    \        }\n        return rank;\n    }\n};"
   dependsOn: []
   isVerificationFile: false
   path: Math/GaussianElimination.cc
   requiredBy: []
-  timestamp: '2021-06-05 15:25:05+09:00'
+  timestamp: '2021-07-09 20:45:50+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: Math/GaussianElimination.cc
