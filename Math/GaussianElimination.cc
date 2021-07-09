@@ -27,11 +27,14 @@ template <typename T> class GaussianElimination {
             }
             for(int row = 0; row < m; row++) {
                 if(row != rank && mat[row][col]) {
+                    auto f = mat[row][col];
                     for(int col2 = 0; col2 < n; col2++) {
-                        mat[row][col2] -= mat[rank][col2] / mat[row][col];
+                        mat[row][col2] -= mat[rank][col2] * f;
                     }
                 }
             }
+            ++rank;
         }
+        return rank;
     }
 };
