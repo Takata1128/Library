@@ -61,7 +61,7 @@ template <class T> struct Matrix {
         return *this;
     }
 
-    Matrix &operator^=(ll k) {
+    Matrix &operator^=(long long k) {
         Matrix B = Matrix::I(height());
         while(k > 0) {
             if(k & 1)
@@ -76,7 +76,7 @@ template <class T> struct Matrix {
     Matrix operator+(const Matrix &B) const { return (Matrix(*this) += B); }
     Matrix operator-(const Matrix &B) const { return (Matrix(*this) -= B); }
     Matrix operator*(const Matrix &B) const { return (Matrix(*this) *= B); }
-    Matrix operator^(const ll k) const { return (Matrix(*this) ^= k); }
+    Matrix operator^(const long long k) const { return (Matrix(*this) ^= k); }
 
     friend ostream &operator<<(ostream &os, const Matrix &p) {
         size_t h = p.height(), w = p.width();

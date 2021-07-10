@@ -2,44 +2,29 @@
 using namespace std;
 
 // 強連結成分分解　O(|V|+|E|)
-class Scc {
-  public:
+template <class Graph> class Scc {
+  private:
     int N;
-    vector<vector<int>> G, rG;
+    Graph G, rG;
     vector<int> vs;
     vector<bool> used;
     vector<int> cmp; // 新グラフのindex
-
-    Scc(vector<vector<int>> _G) : G(_G) {
-        N = G.size();
-        rG.resize(N, vector<int>());
-        for(int i = 0; i < G.size(); i++) {
-            for(auto nv : G[i]) {
-                rG[nv].push_back(i);
-            }
-        }
-        used.resize(N);
-        cmp.resize(N);
-    }
-
     void dfs(int v) {
         used[v] = true;
-        for(auto nv : G[v]) {
-            if(!used[nv])
-                dfs(nv);
+        for(auto e : G[v]) {
+            if(!used[e.to])
+                dfs(e.to);
         }
         vs.push_back(v);
     }
-
     void rdfs(int v, int k) {
         used[v] = true;
         cmp[v] = k;
-        for(auto nv : rG[v]) {
-            if(!used[nv])
-                rdfs(nv, k);
+        for(auto e : rG[v]) {
+            if(!used[e.to])
+                rdfs(e.to, k);
         }
     }
-
     int process() {
         fill(used.begin(), used.end(), false);
         for(int v = 0; v < N; v++) {
@@ -55,13 +40,29 @@ class Scc {
         return k;
     }
 
-    vector<vector<int>> get() {
+  public:
+    Scc(Graph _G) : G(_G) {
+        N = G.size();
+        rG.resize(N);
+        for(int i = 0; i < G.size(); i++) {
+            for(auto e : G[i]) {
+                rG.add_edge(e.to, i);
+            }
+        }
+        used.resize(N);
+        cmp.resize(N);
+        process();
+    }
+    vector<int> get_new_indice() const {
+        return cmp;
+    }
+    vector<vector<int>> get_new_graph() const {
         vector<vector<int>> g(N, vector<int>());
         for(int i = 0; i < N; i++) {
-            for(auto nv : G[i]) {
-                if(cmp[i] == cmp[nv])
+            for(auto e : G[i]) {
+                if(cmp[i] == cmp[e.to])
                     continue;
-                g[cmp[i]].push_back(cmp[nv]);
+                g[cmp[i]].push_back(cmp[e.to]);
             }
         }
         return g;

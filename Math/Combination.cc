@@ -1,8 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
-using ll = long long;
 
-const int MOD = 1e9 + 7;
 //二項係数（nCk mod.p;1<=k<=n<=1e7,pは素数）for ModInt
 template <class T> struct BiCoefficient {
     vector<T> fac, finv, inv;
@@ -38,7 +36,7 @@ template <class T> struct BiCoefficient {
 //二項係数（nCk mod.p;1<=k<=n<=1e7,pは素数）for long long
 struct Combination {
     const int MOD = 1000000007;
-    vector<ll> fac, finv, inv;
+    vector<long long> fac, finv, inv;
     Combination(const int MAX) : fac(MAX), finv(MAX), inv(MAX) {
         fac[0] = fac[1] = 1;
         finv[0] = finv[1] = 1;
@@ -49,7 +47,7 @@ struct Combination {
             finv[i] = finv[i - 1] * inv[i] % MOD;
         }
     }
-    ll comb(int n, int k) {
+    long long comb(int n, int k) {
         if(n < k)
             return 0;
         if(n < 0 || k < 0)
@@ -61,7 +59,7 @@ struct Combination {
 //二項係数（nCk mod.p;1<=k<=n<=2000,pは素数でなくともよい）
 const int MAX_C = 1000;
 long long Com[MAX_C][MAX_C];
-void calc_com() {
+void calc_com(int MOD) {
     memset(Com, 0, sizeof(Com));
     Com[0][0] = 1;
     for(int i = 1; i < MAX_C; ++i) {
@@ -74,12 +72,12 @@ void calc_com() {
 
 //二項係数 (nCk mod.p; p is prime, Lucasの定理)
 struct Lucas {
-    vector<vector<ll>> com;
-    ll p;
-    Lucas(ll p) : p(p) { init(p); }
+    vector<vector<long long>> com;
+    long long p;
+    Lucas(long long p) : p(p) { init(p); }
 
-    void init(ll p) {
-        com.assign(p, vector<ll>(p));
+    void init(long long p) {
+        com.assign(p, vector<long long>(p));
         com[0][0] = 1;
         for(int i = 1; i < p; i++) {
             com[i][0] = 1;
@@ -89,8 +87,8 @@ struct Lucas {
         }
     }
 
-    ll comb(ll n, ll k) {
-        ll ret = 1;
+    long long comb(long long n, long long k) {
+        long long ret = 1;
         while(n > 0) {
             int ni = n % p;
             int ki = k % p;
@@ -107,7 +105,7 @@ struct Lucas {
 // nとkのどちらかが変化していくとき、O(変化量)ですべて求められる　多分
 // 参考：https://perogram.hateblo.jp/entry/2020/07/08/120017
 // https://yukicoder.me/submissions/520882
-template <class T> T nCk(ll n, ll k, map<pair<ll, ll>, T> &mp) {
+template <class T> T nCk(long long n, long long k, map<pair<long long, long long>, T> &mp) {
     auto key = {n, k};
     if(mp.count(key))
         return mp[key];

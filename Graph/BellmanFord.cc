@@ -1,13 +1,12 @@
 #include <vector>
 using namespace std;
-using ll = long long;
 
 /***ベルマンフォード法***/
 const int INF = 1 << 30;
-bool bellman_ford(int s, vector<vector<pair<int, ll>>> const &g,
-                  vector<ll> &dist) {
+bool bellman_ford(int s, vector<vector<pair<int, long long>>> const &g,
+                  vector<long long> &dist) {
     int n = g.size();
-    vector<ll> dist(n, INF);
+    vector<long long> dist(n, INF);
     bool negative_cycle = false;
     dist[s] = 0;
     for(int i = 0; i < n; i++) {

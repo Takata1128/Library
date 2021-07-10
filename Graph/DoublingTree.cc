@@ -1,25 +1,17 @@
 #include <bits/stdc++.h>
 using namespace std;
-/*
-    LCAを求める構造体
-    参考:https://algo-logic.info/lca/
-    初期化:O(NlogN)
-    クエリ:O(logN)
-*/
-struct LowestCommonAncestor {
-    vector<vector<int>> parent; // parent[k][v]:= vの2^k親の頂点
-    vector<int> dist;           // rootからの距離
-    LowestCommonAncestor(const vector<vector<int>> &G, int root = 0) {
-        init(G, root);
-    }
 
-    void init(const vector<vector<int>> &G, int root = 0) {
+template <class Graph> class DoublingTree {
+    using T = decltype(Graph::Edge::cost);
+    vector<vector<int>> parent; // parent[k][v]:= vの2^k親の頂点
+    vector<T> dis;              // rootからの距離
+    void init(const Graph &G, int root = 0) {
         int N = G.size();
         int K = 1;
         while((1 << K) < N)
             K++;
         parent.assign(K, vector<int>(N, -1));
-        dist.assign(N, -1);
+        dis.assign(N, -1);
         dfs(root, -1, 0, G);
         //ダブリング
         for(int k = 0; k + 1 < K; k++) {
@@ -34,22 +26,27 @@ struct LowestCommonAncestor {
     }
 
     // 根からの距離と一つ親を求める
-    void dfs(int v, int p, int d, const vector<vector<int>> &G) {
+    void dfs(int v, int p, int d, const Graph &G) {
         parent[0][v] = p;
-        dist[v] = d;
-        for(auto nv : G[v]) {
-            if(nv != p)
-                dfs(nv, v, d + 1, G);
+        dis[v] = d;
+        for(auto e : G[v]) {
+            if(e.to != p)
+                dfs(e.to, v, d + e.cost, G);
         }
+    }
+
+  public:
+    DoublingTree(const Graph &G, int root = 0) {
+        init(G, root);
     }
 
     // uとvのLCAを求める
     int query(int u, int v) {
-        if(dist[u] < dist[v])
+        if(dis[u] < dis[v])
             swap(u, v);
         int K = parent.size();
         for(int k = 0; k < K; k++) {
-            if((dist[u] - dist[v]) & (1 << k)) {
+            if((dis[u] - dis[v]) & (1 << k)) {
                 u = parent[k][u];
             }
         }
@@ -64,5 +61,10 @@ struct LowestCommonAncestor {
             }
         }
         return parent[0][u];
+    }
+
+    // uとvの距離を求める
+    T dist(int u, int v) {
+        return dis[u] + dis[v] - dis[query(u, v)] * 2;
     }
 };

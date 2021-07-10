@@ -76,3 +76,6 @@ template <uint_fast64_t MOD> class ModInt {
         return ModInt(x);
     }
 };
+
+using mint = ModInt<1000000007UL>;
+// using mint = ModInt<998244353UL>;

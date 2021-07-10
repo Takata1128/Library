@@ -43,13 +43,18 @@ template <class Cap> class Dinic {
         return ret;
     }
 
-    void add_edge(int from, int to, int cap) {
+    void add_edge(int from, int to, Cap cap) {
         assert(0 <= from && from < n);
         assert(0 <= to && to < n);
         assert(0 <= cap);
         pos.push_back({from, int(G[from].size())});
         G[from].push_back(_edge{to, cap, (int)G[to].size()});
         G[to].push_back(_edge{from, 0, (int)G[from].size() - 1});
+    }
+
+    void unite(int from, int to, Cap cap) {
+        add_edge(from, to, cap);
+        add_edge(to, from, cap);
     }
 
     void bfs(int s) {
@@ -94,13 +99,13 @@ template <class Cap> class Dinic {
         assert(0 <= s && s < n);
         assert(0 <= t && t < n);
         assert(s != t);
-        int flow = 0;
+        Cap flow = 0;
         while(flow < limit) {
             bfs(s);
             if(level[t] < 0)
                 return flow;
             fill(iter.begin(), iter.end(), 0);
-            int f;
+            Cap f;
             while((f = dfs(s, t, limit - flow)) > 0) {
                 flow += f;
             }

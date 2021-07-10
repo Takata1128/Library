@@ -204,8 +204,8 @@ template <typename T> class SegmentTreeBeats {
     }
 
   public:
-    SegmentTreeBeats(int n) { SegmentTreeBeats(n, vector<T>(n)); }
-    template <typename S> SegmentTreeBeats(const vector<S> &a) : n(a.size()) {
+    SegmentTreeBeats(int n) : SegmentTreeBeats(vector<T>(n)) {}
+    SegmentTreeBeats(const vector<T> &a) : n(a.size()) {
         n2 = 1;
         while(n2 < n)
             n2 <<= 1;
