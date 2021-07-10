@@ -231,6 +231,8 @@ template <typename T> class SegmentTreeBeats {
         }
     }
 
+    T at(int k) { return query_sum(k, k + 1); };
+
     void update_min(int a, int b, T x) { _update_min(x, a, b, 0, 0, n2); }
     void update_max(int a, int b, T x) { _update_max(x, a, b, 0, 0, n2); }
     void add_val(int a, int b, T x) { _add_val(x, a, b, 0, 0, n2); }

@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// 1+x+x^2+...x^n = (1-x^(n+1))/(1-x)
 template <typename Mint> struct FormalPowerSeries : public vector<Mint> {
     using vector<Mint>::vector;
     using F = FormalPowerSeries<Mint>;
@@ -122,13 +123,13 @@ template <typename Mint> struct FormalPowerSeries : public vector<Mint> {
     void multiply(const int d, const Mint c) {
         int n = this->size();
         if(c == Mint(1))
-            for(int i = n - d; i >= 0; i--)
+            for(int i = n - d - 1; i >= 0; i--)
                 (*this)[i + d] += (*this)[i];
         else if(c == Mint(-1))
-            for(int i = n - d; i >= 0; i--)
+            for(int i = n - d - 1; i >= 0; i--)
                 (*this)[i + d] -= (*this)[i];
         else
-            for(int i = n - d; i >= 0; i--)
+            for(int i = n - d - 1; i >= 0; i--)
                 (*this)[i + d] += (*this)[i] * c;
     }
     void divide(const int d, const Mint c) {

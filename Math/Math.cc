@@ -35,6 +35,8 @@ struct Sieve {
 
     bool is_prime(int x) {
         assert(x <= N);
+        if(x == 1)
+            return false;
         return sieve[x] == x;
     }
 
@@ -166,6 +168,7 @@ long long garner_mod(std::vector<std::pair<long long, long long>> rm,
             (coffs[j] *= m) %= rm[j].second;
         }
     }
+    return constants.back();
 }
 
 long long floor_div(long long a, long long b) {
@@ -180,14 +183,6 @@ long long ceil_div(long long a, long long b) {
     if(b < 0)
         a = -a, b = -b;
     return a >= 0 ? (a + b - 1) / b : a / b;
-}
-// left_most_bit
-long long lmb(long long x) {
-    long long a = 1;
-    while(a <= x) {
-        a *= 2;
-    }
-    return a / 2;
 }
 
 int bit_length(long long x) {
@@ -207,9 +202,10 @@ long long ll_sqrt(long long x) {
     return ret;
 }
 
-// multiple of d in [left,right]
 // multiple of d in [left,right],left>0
 long long cmul(long long left, long long right, long long d) {
+    if(left == 0)
+        return right / d;
     return right / d - (left - 1) / d;
 }
 

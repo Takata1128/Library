@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/inv_of_formal_power_series"
-#include "../Math/Convolution.cc"
+#include "../Math/ConvolutionNTT.cc"
 #include "../Math/FormalPowerSeries.cc"
 #include "../Math/ModInt.cc"
 #include "../Others/template.cc"
