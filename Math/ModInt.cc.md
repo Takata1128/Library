@@ -2,10 +2,16 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/convolution_mod.test.cpp
+    title: verify/convolution_mod.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/inv_of_formal_power_series.test.cpp
+    title: verify/inv_of_formal_power_series.test.cpp
   _isVerificationFailed: false
   _pathExtension: cc
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 1 \"Math/ModInt.cc\"\n#include <bits/stdc++.h>\r\nusing namespace\
@@ -38,7 +44,8 @@ data:
     \ > 0) {\r\n            if(e % 2 == 0) {\r\n                p = (p * p) % MOD;\r\
     \n                e /= 2;\r\n            } else {\r\n                x = (x *\
     \ p) % MOD;\r\n                e--;\r\n            }\r\n        }\r\n        return\
-    \ ModInt(x);\r\n    }\r\n};\n"
+    \ ModInt(x);\r\n    }\r\n};\r\n\r\nusing mint = ModInt<1000000007UL>;\r\n// using\
+    \ mint = ModInt<998244353UL>;\r\n"
   code: "#include <bits/stdc++.h>\r\nusing namespace std;\r\n/* ModInt */\r\ntemplate\
     \ <uint_fast64_t MOD> class ModInt {\r\n    using u64 = uint_fast64_t;\r\n\r\n\
     \  public:\r\n    u64 val;\r\n\r\n    ModInt(const u64 x = 0) : val((x + MOD)\
@@ -68,14 +75,17 @@ data:
     \ x = 1, p = val;\r\n        while(e > 0) {\r\n            if(e % 2 == 0) {\r\n\
     \                p = (p * p) % MOD;\r\n                e /= 2;\r\n           \
     \ } else {\r\n                x = (x * p) % MOD;\r\n                e--;\r\n \
-    \           }\r\n        }\r\n        return ModInt(x);\r\n    }\r\n};"
+    \           }\r\n        }\r\n        return ModInt(x);\r\n    }\r\n};\r\n\r\n\
+    using mint = ModInt<1000000007UL>;\r\n// using mint = ModInt<998244353UL>;\r\n"
   dependsOn: []
   isVerificationFile: false
   path: Math/ModInt.cc
   requiredBy: []
-  timestamp: '2021-07-09 20:45:50+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  timestamp: '2021-07-10 17:13:22+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/inv_of_formal_power_series.test.cpp
+  - verify/convolution_mod.test.cpp
 documentation_of: Math/ModInt.cc
 layout: document
 redirect_from:

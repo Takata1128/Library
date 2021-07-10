@@ -15,10 +15,10 @@ data:
     - icon: ':warning:'
       path: DataStructure/LazySegmentTree.cc
       title: DataStructure/LazySegmentTree.cc
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: DataStructure/SegmentTree.cc
       title: DataStructure/SegmentTree.cc
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: DataStructure/SegmentTreeBeats.cc
       title: DataStructure/SegmentTreeBeats.cc
     - icon: ':warning:'
@@ -27,7 +27,7 @@ data:
     - icon: ':warning:'
       path: DataStructure/SqrtDecomposition.cc
       title: DataStructure/SqrtDecomposition.cc
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: DataStructure/UnionFind.cc
       title: DataStructure/UnionFind.cc
   - name: Graph
@@ -36,11 +36,11 @@ data:
       path: Graph/BellmanFord.cc
       title: Graph/BellmanFord.cc
     - icon: ':warning:'
-      path: Graph/Dijkstra.cc
-      title: Graph/Dijkstra.cc
-    - icon: ':warning:'
       path: Graph/Dinic.cc
       title: Graph/Dinic.cc
+    - icon: ':warning:'
+      path: Graph/DoublingTree.cc
+      title: Graph/DoublingTree.cc
     - icon: ':warning:'
       path: Graph/FordFulkerson.cc
       title: Graph/FordFulkerson.cc
@@ -50,9 +50,6 @@ data:
     - icon: ':warning:'
       path: Graph/HLDecomposition.cc
       title: Graph/HLDecomposition.cc
-    - icon: ':warning:'
-      path: Graph/LowestCommonAncestor.cc
-      title: Graph/LowestCommonAncestor.cc
     - icon: ':warning:'
       path: Graph/Lowlink.cc
       title: Graph/Lowlink.cc
@@ -73,13 +70,13 @@ data:
     - icon: ':warning:'
       path: Math/ConvolutionFFT.cc
       title: Math/ConvolutionFFT.cc
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: Math/ConvolutionNTT.cc
       title: Math/ConvolutionNTT.cc
     - icon: ':warning:'
       path: Math/Determinant.cc
       title: Math/Determinant.cc
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: Math/FormalPowerSeries.cc
       title: Math/FormalPowerSeries.cc
     - icon: ':warning:'
@@ -95,7 +92,7 @@ data:
     - icon: ':warning:'
       path: Math/Matrix.cc
       title: Math/Matrix.cc
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: Math/ModInt.cc
       title: Math/ModInt.cc
   - name: Others
@@ -106,6 +103,9 @@ data:
     - icon: ':warning:'
       path: Others/cp-template.cc
       title: Others/cp-template.cc
+    - icon: ':heavy_check_mark:'
+      path: Others/template.cc
+      title: Others/template.cc
   - name: String
     pages:
     - icon: ':warning:'
@@ -123,19 +123,19 @@ data:
   verificationCategories:
   - name: verify
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/convolution_mod.test.cpp
       title: verify/convolution_mod.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/inv_of_formal_power_series.test.cpp
       title: verify/inv_of_formal_power_series.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/range_chmin_chmax_add_range_sum.test.cpp
       title: verify/range_chmin_chmax_add_range_sum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/staticrmq.test.cpp
       title: verify/staticrmq.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/unionfind.test.cpp
       title: verify/unionfind.test.cpp
 layout: toppage

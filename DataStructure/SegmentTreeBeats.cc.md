@@ -2,10 +2,13 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/range_chmin_chmax_add_range_sum.test.cpp
+    title: verify/range_chmin_chmax_add_range_sum.test.cpp
   _isVerificationFailed: false
   _pathExtension: cc
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 1 \"DataStructure/SegmentTreeBeats.cc\"\n#include <bits/stdc++.h>\n\
@@ -90,26 +93,25 @@ data:
     \ <= l && r <= b) {\n            return sum[k];\n        }\n        push(k);\n\
     \        T lv = _query_sum(a, b, 2 * k + 1, l, (l + r) / 2);\n        T rv = _query_sum(a,\
     \ b, 2 * k + 2, (l + r) / 2, r);\n        return lv + rv;\n    }\n\n  public:\n\
-    \    SegmentTreeBeats(int n) { SegmentTreeBeats(n, vector<T>(n)); }\n    template\
-    \ <typename S> SegmentTreeBeats(const vector<S> &a) : n(a.size()) {\n        n2\
-    \ = 1;\n        while(n2 < n)\n            n2 <<= 1;\n        f_max.assign(2 *\
-    \ n2, -inf);\n        s_max.assign(2 * n2, -inf);\n        max_n.resize(2 * n2);\n\
-    \        f_min.assign(2 * n2, inf);\n        s_min.assign(2 * n2, inf);\n    \
-    \    min_n.resize(2 * n2);\n        sum.resize(2 * n2);\n        len.resize(2\
-    \ * n2);\n        ladd.resize(2 * n2);\n        lval.assign(2 * n2, inf);\n  \
-    \      len[0] = n2;\n        for(int i = 0; i < n2 - 1; i++)\n            len[2\
-    \ * i + 1] = len[2 * i + 2] = (len[i] >> 1);\n        for(int i = 0; i < n; i++)\
-    \ {\n            f_max[n2 - 1 + i] = f_min[n2 - 1 + i] = sum[n2 - 1 + i] = a[i];\n\
-    \            max_n[n2 - 1 + i] = min_n[n2 - 1 + i] = 1;\n        }\n        for(int\
-    \ i = n2 - 2; i >= 0; i--) {\n            update(i);\n        }\n    }\n\n   \
-    \ T at(int k) { return query_sum(k, k + 1); };\n\n    void update_min(int a, int\
-    \ b, T x) { _update_min(x, a, b, 0, 0, n2); }\n    void update_max(int a, int\
-    \ b, T x) { _update_max(x, a, b, 0, 0, n2); }\n    void add_val(int a, int b,\
-    \ T x) { _add_val(x, a, b, 0, 0, n2); }\n    void update_val(int a, int b, T x)\
-    \ { _update_val(x, a, b, 0, 0, n2); }\n    T query_max(int a, int b) { return\
-    \ _query_max(a, b, 0, 0, n2); }\n    T query_min(int a, int b) { return _query_min(a,\
-    \ b, 0, 0, n2); }\n    T query_sum(int a, int b) { return _query_sum(a, b, 0,\
-    \ 0, n2); }\n};\n"
+    \    SegmentTreeBeats(int n) : SegmentTreeBeats(vector<T>(n)) {}\n    SegmentTreeBeats(const\
+    \ vector<T> &a) : n(a.size()) {\n        n2 = 1;\n        while(n2 < n)\n    \
+    \        n2 <<= 1;\n        f_max.assign(2 * n2, -inf);\n        s_max.assign(2\
+    \ * n2, -inf);\n        max_n.resize(2 * n2);\n        f_min.assign(2 * n2, inf);\n\
+    \        s_min.assign(2 * n2, inf);\n        min_n.resize(2 * n2);\n        sum.resize(2\
+    \ * n2);\n        len.resize(2 * n2);\n        ladd.resize(2 * n2);\n        lval.assign(2\
+    \ * n2, inf);\n        len[0] = n2;\n        for(int i = 0; i < n2 - 1; i++)\n\
+    \            len[2 * i + 1] = len[2 * i + 2] = (len[i] >> 1);\n        for(int\
+    \ i = 0; i < n; i++) {\n            f_max[n2 - 1 + i] = f_min[n2 - 1 + i] = sum[n2\
+    \ - 1 + i] = a[i];\n            max_n[n2 - 1 + i] = min_n[n2 - 1 + i] = 1;\n \
+    \       }\n        for(int i = n2 - 2; i >= 0; i--) {\n            update(i);\n\
+    \        }\n    }\n\n    T at(int k) { return query_sum(k, k + 1); };\n\n    void\
+    \ update_min(int a, int b, T x) { _update_min(x, a, b, 0, 0, n2); }\n    void\
+    \ update_max(int a, int b, T x) { _update_max(x, a, b, 0, 0, n2); }\n    void\
+    \ add_val(int a, int b, T x) { _add_val(x, a, b, 0, 0, n2); }\n    void update_val(int\
+    \ a, int b, T x) { _update_val(x, a, b, 0, 0, n2); }\n    T query_max(int a, int\
+    \ b) { return _query_max(a, b, 0, 0, n2); }\n    T query_min(int a, int b) { return\
+    \ _query_min(a, b, 0, 0, n2); }\n    T query_sum(int a, int b) { return _query_sum(a,\
+    \ b, 0, 0, n2); }\n};\n"
   code: "#include <bits/stdc++.h>\nusing namespace std;\n\ntemplate <typename T> class\
     \ SegmentTreeBeats {\n    const T inf = numeric_limits<T>::max();\n    int n,\
     \ n2;\n    vector<T> f_max, s_max, max_n;\n    vector<T> f_min, s_min, min_n;\n\
@@ -191,33 +193,33 @@ data:
     \ <= l && r <= b) {\n            return sum[k];\n        }\n        push(k);\n\
     \        T lv = _query_sum(a, b, 2 * k + 1, l, (l + r) / 2);\n        T rv = _query_sum(a,\
     \ b, 2 * k + 2, (l + r) / 2, r);\n        return lv + rv;\n    }\n\n  public:\n\
-    \    SegmentTreeBeats(int n) { SegmentTreeBeats(n, vector<T>(n)); }\n    template\
-    \ <typename S> SegmentTreeBeats(const vector<S> &a) : n(a.size()) {\n        n2\
-    \ = 1;\n        while(n2 < n)\n            n2 <<= 1;\n        f_max.assign(2 *\
-    \ n2, -inf);\n        s_max.assign(2 * n2, -inf);\n        max_n.resize(2 * n2);\n\
-    \        f_min.assign(2 * n2, inf);\n        s_min.assign(2 * n2, inf);\n    \
-    \    min_n.resize(2 * n2);\n        sum.resize(2 * n2);\n        len.resize(2\
-    \ * n2);\n        ladd.resize(2 * n2);\n        lval.assign(2 * n2, inf);\n  \
-    \      len[0] = n2;\n        for(int i = 0; i < n2 - 1; i++)\n            len[2\
-    \ * i + 1] = len[2 * i + 2] = (len[i] >> 1);\n        for(int i = 0; i < n; i++)\
-    \ {\n            f_max[n2 - 1 + i] = f_min[n2 - 1 + i] = sum[n2 - 1 + i] = a[i];\n\
-    \            max_n[n2 - 1 + i] = min_n[n2 - 1 + i] = 1;\n        }\n        for(int\
-    \ i = n2 - 2; i >= 0; i--) {\n            update(i);\n        }\n    }\n\n   \
-    \ T at(int k) { return query_sum(k, k + 1); };\n\n    void update_min(int a, int\
-    \ b, T x) { _update_min(x, a, b, 0, 0, n2); }\n    void update_max(int a, int\
-    \ b, T x) { _update_max(x, a, b, 0, 0, n2); }\n    void add_val(int a, int b,\
-    \ T x) { _add_val(x, a, b, 0, 0, n2); }\n    void update_val(int a, int b, T x)\
-    \ { _update_val(x, a, b, 0, 0, n2); }\n    T query_max(int a, int b) { return\
-    \ _query_max(a, b, 0, 0, n2); }\n    T query_min(int a, int b) { return _query_min(a,\
-    \ b, 0, 0, n2); }\n    T query_sum(int a, int b) { return _query_sum(a, b, 0,\
-    \ 0, n2); }\n};\n"
+    \    SegmentTreeBeats(int n) : SegmentTreeBeats(vector<T>(n)) {}\n    SegmentTreeBeats(const\
+    \ vector<T> &a) : n(a.size()) {\n        n2 = 1;\n        while(n2 < n)\n    \
+    \        n2 <<= 1;\n        f_max.assign(2 * n2, -inf);\n        s_max.assign(2\
+    \ * n2, -inf);\n        max_n.resize(2 * n2);\n        f_min.assign(2 * n2, inf);\n\
+    \        s_min.assign(2 * n2, inf);\n        min_n.resize(2 * n2);\n        sum.resize(2\
+    \ * n2);\n        len.resize(2 * n2);\n        ladd.resize(2 * n2);\n        lval.assign(2\
+    \ * n2, inf);\n        len[0] = n2;\n        for(int i = 0; i < n2 - 1; i++)\n\
+    \            len[2 * i + 1] = len[2 * i + 2] = (len[i] >> 1);\n        for(int\
+    \ i = 0; i < n; i++) {\n            f_max[n2 - 1 + i] = f_min[n2 - 1 + i] = sum[n2\
+    \ - 1 + i] = a[i];\n            max_n[n2 - 1 + i] = min_n[n2 - 1 + i] = 1;\n \
+    \       }\n        for(int i = n2 - 2; i >= 0; i--) {\n            update(i);\n\
+    \        }\n    }\n\n    T at(int k) { return query_sum(k, k + 1); };\n\n    void\
+    \ update_min(int a, int b, T x) { _update_min(x, a, b, 0, 0, n2); }\n    void\
+    \ update_max(int a, int b, T x) { _update_max(x, a, b, 0, 0, n2); }\n    void\
+    \ add_val(int a, int b, T x) { _add_val(x, a, b, 0, 0, n2); }\n    void update_val(int\
+    \ a, int b, T x) { _update_val(x, a, b, 0, 0, n2); }\n    T query_max(int a, int\
+    \ b) { return _query_max(a, b, 0, 0, n2); }\n    T query_min(int a, int b) { return\
+    \ _query_min(a, b, 0, 0, n2); }\n    T query_sum(int a, int b) { return _query_sum(a,\
+    \ b, 0, 0, n2); }\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: DataStructure/SegmentTreeBeats.cc
   requiredBy: []
-  timestamp: '2021-06-05 15:25:05+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  timestamp: '2021-07-10 17:13:22+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/range_chmin_chmax_add_range_sum.test.cpp
 documentation_of: DataStructure/SegmentTreeBeats.cc
 layout: document
 redirect_from:
