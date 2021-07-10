@@ -1,1 +1,7 @@
-{}
+{
+"verify/convolution_mod.test.cpp": "2021-07-10 17:13:22 +0900",
+"verify/inv_of_formal_power_series.test.cpp": "2021-07-10 17:13:22 +0900",
+"verify/range_chmin_chmax_add_range_sum.test.cpp": "2021-07-10 17:13:22 +0900",
+"verify/staticrmq.test.cpp": "2021-07-10 17:10:46 +0900",
+"verify/unionfind.test.cpp": "2021-07-10 17:10:46 +0900"
+}
