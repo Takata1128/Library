@@ -2,7 +2,7 @@
 #include "../Math/ConvolutionNTT.cc"
 #include "../Math/FormalPowerSeries.cc"
 #include "../Math/ModInt.cc"
-#include "../Others/cp-template.cc"
+#include "./template.cc"
 
 int main() {
     INT(n);

@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/unionfind"
 #include "../DataStructure/UnionFind.cc"
-#include "../Others/cp-template.cc"
+#include "./template.cc"
 
 int main() {
     INT(n, q);

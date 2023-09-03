@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/staticrmq"
 #include "../DataStructure/SegmentTree.cc"
-#include "../Others/cp-template.cc"
+#include "./template.cc"
 
 using S = int;
 S op(const S &a, const S &b) { return min(a, b); };
