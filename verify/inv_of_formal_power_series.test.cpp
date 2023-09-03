@@ -1,8 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/inv_of_formal_power_series"
+#include "./template.cc"
 #include "../Math/ConvolutionNTT.cc"
 #include "../Math/FormalPowerSeries.cc"
 #include "../Math/ModInt.cc"
-#include "./template.cc"
 
 int main() {
     INT(n);

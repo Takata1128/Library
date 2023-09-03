@@ -177,10 +177,11 @@ template <class S, class F> class LazySegmentTree {
         return 0;
     }
 };
-using S = int;
-using F = int;
-S e() { return int(1e9); }
-F id() { return -1; }
-S op(S a, S b) { return min(a, b); };
-S mapping(S a, F f) { return a == id() ? f : a; };
-F composition(F f, F g) { return f == id() ? g : f; };
+
+// using S = int;
+// using F = int;
+// S e() { return int(1e9); }
+// F id() { return -1; }
+// S op(S a, S b) { return min(a, b); };
+// S mapping(S a, F f) { return a == id() ? f : a; };
+// F composition(F f, F g) { return f == id() ? g : f; };

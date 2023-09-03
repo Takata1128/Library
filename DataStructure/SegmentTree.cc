@@ -110,8 +110,8 @@ template <typename S> class SegmentTree {
     }
 };
 
-using S = int;
-S op(const S &a, const S &b) {
-    return a + b;
-};
-S e() { return 0; };
+// using S = int;
+// S op(const S &a, const S &b) {
+//     return a + b;
+// };
+// S e() { return 0; };
