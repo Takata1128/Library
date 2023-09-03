@@ -20,7 +20,8 @@ std::set<long long> divisor(long long n) {
 struct Sieve {
     int N;
     std::vector<int> sieve;
-    Sieve(int n) : N(n + 1), sieve(n + 1) { init(); }
+    std::vector<int> primes;
+    Sieve(int n) : N(n), sieve(n + 1) { init(); }
     void init() {
         std::iota(sieve.begin(), sieve.end(), 0);
         for(int i = 2; i * i <= N; i++) {
@@ -31,6 +32,9 @@ struct Sieve {
                     sieve[j] = i;
             }
         }
+        for(int i = 2; i <= N; i++) {
+            if(is_prime(i)) primes.push_back(i);
+        }
     }
 
     bool is_prime(int x) {
@@ -40,13 +44,25 @@ struct Sieve {
         return sieve[x] == x;
     }
 
-    std::map<long long, int> prime_factorize(long long n) {
+    std::map<long long, int> prime_factorize(int n) {
         assert(n <= N);
         std::map<long long, int> ret;
         while(n > 1) {
             ret[sieve[n]]++;
             n = n / sieve[n];
         }
+        return ret;
+    }
+
+    std::map<long long, int> prime_factorize_large(long long n) {
+        std::map<long long, int> ret;
+        for(auto p : primes) {
+            while(n % p == 0) {
+                ret[p]++;
+                n /= p;
+            }
+        }
+        if(n > 1) ret[n] = 1;
         return ret;
     }
 };
@@ -215,7 +231,7 @@ long long count_multiple(long long left, long long right, long long d) {
         return cmul(-right, -left, d);
     if(left > 0)
         return cmul(left, right, d);
-    return cmul(0, right, d) + cmul(0, -left, d) - 1;
+    return cmul(0, right, d) + cmul(0, -left, d) + 1;
 }
 
 }; // namespace math

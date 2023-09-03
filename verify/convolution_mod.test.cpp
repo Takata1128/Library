@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/convolution_mod"
 #include "../Math/ConvolutionNTT.cc"
 #include "../Math/ModInt.cc"
-#include "../Others/template.cc"
+#include "../Others/cp-template.cc"
 
 int main() {
     INT(n, m);

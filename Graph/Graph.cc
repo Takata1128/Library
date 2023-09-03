@@ -123,4 +123,29 @@ template <typename T = int> class Graph {
         }
         return make_pair(sum, ret);
     }
+
+    vector<int> topological_sort() {
+        vector<int> ret;
+        stack<int> st;
+        vector<int> in(n);
+        for(int i = 0; i < n; i++) {
+            for(auto e : g[i]) {
+                in[e.to] += 1;
+            }
+        }
+        for(int i = 0; i < in.size(); i++)
+            if(in[i] == 0)
+                st.push(i);
+        while(!st.empty()) {
+            int v = st.top();
+            st.pop();
+            ret.push_back(v);
+            for(auto e : g[v]) {
+                in[e.to]--;
+                if(in[e.to] == 0)
+                    st.push(e.to);
+            }
+        }
+        return ret;
+    }
 };

@@ -64,7 +64,7 @@ template <class F> class DualSegTree {
         thrust(R0);
         while(L < R) {
             if(L & 1) {
-                lazy[L] = composition(x, lazy[L]);
+                lazy[L] = composition(lazy[L], x);
                 L++;
             }
             if(R & 1) {
@@ -86,6 +86,6 @@ template <class F> class DualSegTree {
     F operator[](int k) { return at(k); }
 };
 
-struct F {};
-F composition(F f, F g){};
-F id() {}
+using F = int;
+F id() { return -1; }
+F composition(F f, F g) { return f = id() ? g : f; };

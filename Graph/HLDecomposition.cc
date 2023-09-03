@@ -1,66 +1,58 @@
 #include <bits/stdc++.h>
+using namespace std;
 
-class HLDecomposition {
+template <typename Tree>
+class HeavyLightDecomposition {
   private:
-    std::vector<std::vector<int>> g; // グラフ（木）
-    int t;
-    std::vector<int> sz;  // もとの木の部分木のサイズ
-    std::vector<int> par; // もとの木での親
-    std::vector<int>
-        idx; // vの新たなidx(行きがけ順) segtree等に乗せたときのidxに対応
-    std::vector<int> head; // 連結成分のうち最もidxが若い(浅い)頂点
-    std::vector<int> depth; // もとの木での深さ
+    Tree g;           // グラフ（木）
+    int n;            // 木の頂点数
+    int t;            // 探索順序
+    vector<int> sz;   // もとの木の部分木のサイズ
+    vector<int> par;  // もとの木での親
+    vector<int> idx;  // vの新たなidx(行きがけ順) segtree等に乗せたときのidxに対応
+    vector<int> out;  // vの帰りがけ順 部分木クエリに使用
+    vector<int> head; // 連結成分のうち最もidxが若い(浅い)頂点
+    vector<int> dpth; // もとの木での深さ
 
-  public:
-    HLDecomposition(std::vector<std::vector<int>> &g, int root = 0)
-        : g(g), sz(g.size()), par(g.size()), idx(g.size()), head(g.size()),
-          depth(g.size()), t(0) {
-        dfs_sz(root, 0, -1);
-        dfs_hld(root, -1, 0);
-    }
-
-    int dfs_sz(int v, int d, int p) {
+    // 各部分木のサイズ計算
+    int dfs_sz(int v, int p, int d) {
         par[v] = p;
-        if(sz[v] != 0)
-            return sz[v];
+        dpth[v] = d;
         sz[v] = 1;
-        depth[v] = d;
-        for(auto nv : g[v]) {
-            if(p == nv)
-                continue;
-            sz[v] += dfs_sz(nv, d + 1, v);
+        if(g[v].size() >= 2 && g[v][0].to == p) swap(g[v][0], g[v].back()); // g[v][0]が親への辺だとまずい
+        for(auto &e : g[v]) {
+            if(p == e.to) continue;
+            sz[v] += dfs_sz(e.to, v, d + 1);
+            if(sz[e.to] > sz[g[v][0].to]) swap(g[v][0], e); // heavyな辺を先頭へ
         }
         return sz[v];
     }
 
-    void dfs_hld(int v, int p, int h) {
+    // HL分解
+    void dfs_hld(int v, int p) {
         idx[v] = t++;
-        head[v] = h;
-        if(par[v] != -1 && g[v].size() == 1)
-            return;
-        int m = 0;
-        int nxt = -1;
-        for(auto nv : g[v]) {
-            if(nv == p)
-                continue;
-            if(sz[nv] > m) {
-                m = sz[nv];
-                nxt = nv;
-            }
+        for(auto e : g[v]) {
+            if(e.to == p) continue;
+            head[e.to] = (e.to == g[v][0].to ? head[v] : e.to); // heavyな辺か？
+            dfs_hld(e.to, v);
         }
-        dfs_hld(nxt, v, h);
-        for(auto nv : g[v]) {
-            if(p == nv)
-                continue;
-            if(nv != nxt)
-                dfs_hld(nv, v, nv);
-        }
+        out[v] = t;
     }
 
-    std::vector<std::pair<int, int>> query(int u, int v, bool is_edge = false) {
-        std::vector<std::pair<int, int>> ret;
+  public:
+    HeavyLightDecomposition(Tree &g, int root = 0)
+        : g(g), n(g.size()), sz(n), par(n), idx(n), out(n), head(n),
+          dpth(n), t(0) {
+        assert(g.edges.size() == n - 1);
+        dfs_sz(root, -1, 0);
+        dfs_hld(root, -1);
+    }
+
+    // [u,v]パスのHL分解後の区間の集合を取得
+    vector<pair<int, int>> get_path_sequences(int u, int v, bool is_edge = false) {
+        vector<pair<int, int>> ret;
         while(head[u] != head[v]) {
-            if(depth[head[u]] <= depth[head[v]]) {
+            if(dpth[head[u]] <= dpth[head[v]]) {
                 ret.push_back({idx[head[v]], idx[v]});
                 v = par[head[v]];
             } else {
@@ -70,35 +62,67 @@ class HLDecomposition {
         }
         if(!(is_edge && idx[u] == idx[v]))
             ret.push_back(
-                {std::min(idx[u], idx[v]) + is_edge, std::max(idx[u], idx[v])});
+                {min(idx[u], idx[v]) + is_edge, max(idx[u], idx[v])});
         return ret;
     }
 
-    template <typename S, typename Query, typename Function>
-    S query(int u, int v, const S &e, const Query &q, const Function &f,
-            bool is_edge = false) {
-        S l = e, r = e;
-        for(;; v = par[head[v]]) {
-            if(idx[u] > idx[v]) {
-                std::swap(u, v), std::swap(l, r);
-            }
-            if(head[v] == head[u])
-                break;
-            l = f(q(idx[head[v]], idx[v] + 1), l);
-        }
-        return f(f(q(idx[u] + is_edge, idx[v] + 1), l), r);
+    // 頂点u以下の部分木のHL分解後の区間の集合を取得
+    vector<pair<int, int>> get_subtree_sequences(int v, bool is_edge = false) {
+        return get_path_sequences(idx[v] + is_edge, out[v] - 1, is_edge);
     }
 
-    int lca(int u, int v) {
+    // [u,v]パスに対する更新 O((log n)^2)
+    template <class Function>
+    void apply_path(int u, int v, const Function &update, bool is_edge = false) {
+        for(;; v = par[head[v]]) {
+            if(idx[u] > idx[v]) { // uが根側
+                swap(u, v);
+            }
+            if(head[v] == head[u]) break;
+            update(idx[head[v]], idx[v]);
+        }
+        update(idx[u] + is_edge, idx[v]);
+    }
+
+    // [u,v]パスに対する取得 O((log n)^2)
+    template <typename S, typename Op, typename Function>
+    S prod_path(int u, int v, const S &e, const Op &op, const Function &prod,
+                bool is_edge = false) const {
+        S l = e, r = e;
+        for(;; v = par[head[v]]) { // uが根側
+            if(idx[u] > idx[v]) {
+                swap(u, v), swap(l, r);
+            }
+            if(head[v] == head[u]) break;
+            l = op(prod(idx[head[v]], idx[v]), l);
+        }
+        return op(op(prod(idx[u] + is_edge, idx[v]), l), r);
+    }
+
+    // vを根とする部分木に対する更新 O(log n)
+    void apply_subtree(int v, function<void(int, int)> func, bool is_edge = false) {
+        func(idx[v] + is_edge, out[v] - 1);
+    }
+
+    // vを根とする部分木に対する取得 O(log n)
+    template <typename S>
+    S prod_subtree(int v, function<S(int, int)> func, bool is_edge = false) const {
+        return func(idx[v] + is_edge, out[v] - 1);
+    }
+
+    // u,vのLCA : O(log n)
+    int lca(int u, int v) const {
         for(;; v = par[head[v]]) {
             if(idx[u] > idx[v])
-                std::swap(u, v);
+                swap(u, v);
             if(head[u] == head[v])
                 return u;
         }
     }
-
-    int get_idx(int v) { return idx[v]; }
-    int get_depth(int v) { return depth[v]; }
-    int get_size(int v) { return sz[v]; }
+    int dist(int u, int v) const {
+        return dpth[u] + dpth[v] - 2 * dpth[lca(u, v)];
+    }
+    int index(int v) const { return idx[v]; }
+    int depth(int v) const { return dpth[v]; }
+    int subtree_size(int v) const { return sz[v]; }
 };

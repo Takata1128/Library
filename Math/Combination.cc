@@ -2,19 +2,22 @@
 using namespace std;
 
 //二項係数（nCk mod.p;1<=k<=n<=1e7,pは素数）for ModInt
-template <class T> struct BiCoefficient {
-    vector<T> fac, finv, inv;
-    BiCoefficient(const int MAX) : fac(MAX), finv(MAX), inv(MAX) {
+template <class Mint> struct CombinationMint {
+    int N;
+    vector<Mint> fac, finv, inv;
+    CombinationMint(const int n) : N(n + 1), fac(N), finv(N), inv(N) {
         fac[0] = fac[1] = 1;
         finv[0] = finv[1] = 1;
         inv[1] = 1;
-        for(int i = 2; i < MAX; i++) {
+        int mod = Mint::get_mod();
+        for(int i = 2; i < N; i++) {
             fac[i] = fac[i - 1] * i;
-            inv[i] = -inv[MOD % i] * (MOD / i);
+            inv[i] = -inv[mod % i] * (mod / i);
             finv[i] = finv[i - 1] * inv[i];
         }
     }
-    T comb(int n, int k) {
+    Mint comb(int n, int k) {
+        assert(n < N);
         if(n < k)
             return 0;
         if(n < 0 || k < 0)
@@ -23,25 +26,22 @@ template <class T> struct BiCoefficient {
     }
 };
 
-// // 長さn,1<=a[i]<=mで単調増加の数列
-// T inc_seq(int n, int m) { return comb(m, n); }
-// // 長さn,1<=a[i]<=mで広義単調増加の数列(b[i]:=a[i]+iとおいて↑に帰着)
-// // 片方もしくは両端を固定するとき:comb(m+n-1,(n-1 or n-2));
-// T non_dec_seq(int n, int m) { return comb(m + n - 1, n); }
-// // 足してSになる長さnの整数列
-// T sum_seq(int n,int S){ return comb(S+n-1,n); }
-// // 足してS以下になる長さnの整数列
-// T sum_no_more_seq(int n,int S){return comb(S+n,n);}
+// 長さn,1<=a[i]<=mで単調増加: comb(m, n)
+// 長さn,1<=a[i]<=mで広義単調増加: (b[i]:=a[i]+iとおいて↑に帰着)
+// 片方もしくは両端を固定するとき: comb(m + n - 1, (n - 1 or n - 2)), comb(m + n - 1, n);
+// 足してS,長さn: comb(S + n - 1, n)
+// 足してS以下,長さn: comb(S + n, n)
 
 //二項係数（nCk mod.p;1<=k<=n<=1e7,pは素数）for long long
-struct Combination {
+struct CombinationLL {
     const int MOD = 1000000007;
+    int N;
     vector<long long> fac, finv, inv;
-    Combination(const int MAX) : fac(MAX), finv(MAX), inv(MAX) {
+    CombinationLL(const int n) : N(n + 1), fac(N), finv(N), inv(N) {
         fac[0] = fac[1] = 1;
         finv[0] = finv[1] = 1;
         inv[1] = 1;
-        for(int i = 2; i < MAX; i++) {
+        for(int i = 2; i < N; i++) {
             fac[i] = fac[i - 1] * i % MOD;
             inv[i] = MOD - inv[MOD % i] * (MOD / i) % MOD;
             finv[i] = finv[i - 1] * inv[i] % MOD;
@@ -52,6 +52,7 @@ struct Combination {
             return 0;
         if(n < 0 || k < 0)
             return 0;
+        assert(n < N);
         return fac[n] * (finv[k] * finv[n - k] % MOD) % MOD;
     }
 };

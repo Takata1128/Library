@@ -1,7 +1,7 @@
-#define PROBLEM                                                                \
+#define PROBLEM \
     "https://judge.yosupo.jp/problem/range_chmin_chmax_add_range_sum"
 #include "../DataStructure/SegmentTreeBeats.cc"
-#include "../Others/template.cc"
+#include "../Others/cp-template.cc"
 
 int main() {
     INT(n, q);

@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-template <class S, class F> class LazySegTree {
+template <class S, class F> class LazySegmentTree {
   private:
     using Op = function<S(S, S)>;
     using Mapping = function<S(S, F)>;
@@ -12,20 +12,22 @@ template <class S, class F> class LazySegTree {
     const Op op;
     const Mapping mapping;
     const Composition composition;
-    const S e;
-    const F oe;
+    const function<S> e;
+    const function<F> id;
     vector<S> node;
     vector<F> lazy;
 
     // ノードの評価
-    inline S eval(int k) const { return mapping(node[k], lazy[k]); }
+    inline S eval(int k) const { return lazy[k] == id ? node[k] : mapping(node[k], lazy[k]); }
 
     // 子に伝播
     inline void propagate(int k) {
-        lazy[2 * k] = composition(lazy[2 * k], lazy[k]);
-        lazy[2 * k + 1] = composition(lazy[2 * k + 1], lazy[k]);
-        node[k] = eval(k);
-        lazy[k] = oe;
+        if(lazy[k] != id) {
+            lazy[2 * k] = composition(lazy[2 * k], lazy[k]);
+            lazy[2 * k + 1] = composition(lazy[2 * k + 1], lazy[k]);
+            node[k] = eval(k);
+            lazy[k] = id;
+        }
     }
 
     // 上から伝播
@@ -45,6 +47,32 @@ template <class S, class F> class LazySegTree {
     }
 
   public:
+    LazySegmentTree(int sz, const Op op, const Mapping mapping,
+                    const Composition composition, const S &e, const F &id)
+        : op(op), mapping(mapping), composition(composition), e(e), id(id) {
+        org_size = sz;
+        n = 1;
+        while(n < org_size) {
+            n <<= 1;
+        }
+        node.resize(2 * n, e());
+        lazy.resize(2 * n, id());
+    }
+    LazySegmentTree(const vector<S> &v, const Op op, const Mapping mapping,
+                    const Composition composition, const S &e, const F &id)
+        : op(op), mapping(mapping), composition(composition), e(e), id(id) {
+        org_size = v.size();
+        n = 1;
+        while(n < org_size) {
+            n <<= 1;
+        }
+        node.resize(2 * n, e());
+        lazy.resize(2 * n, id());
+        for(int i = 0; i < org_size; i++)
+            set(i, v[i]);
+        build();
+    }
+
     void set(int k, const S &x) { node[k + n] = x; }
 
     void build() {
@@ -53,57 +81,57 @@ template <class S, class F> class LazySegTree {
     }
 
     // [L,R)区間作用
-    void update(int L, int R, F x) {
-        L += n, R += n;
-        int L0 = L / (L & -L), R0 = R / (R & -R) - 1;
-        thrust(L0);
-        thrust(R0);
-        while(L < R) {
-            if(L & 1) {
-                lazy[L] = composition(lazy[L], x);
-                L++;
+    void update(int l, int r, F x) {
+        l += n, r += n;
+        int l0 = l / (l & -l), r0 = r / (r & -r) - 1;
+        thrust(l0);
+        thrust(r0);
+        while(l < r) {
+            if(l & 1) {
+                lazy[l] = composition(lazy[l], x);
+                l++;
             }
-            if(R & 1) {
-                R--;
-                lazy[R] = composition(lazy[R], x);
+            if(r & 1) {
+                r--;
+                lazy[r] = composition(lazy[r], x);
             }
-            L >>= 1;
-            R >>= 1;
+            l >>= 1;
+            r >>= 1;
         }
-        recalc(L0);
-        recalc(R0);
+        recalc(l0);
+        recalc(r0);
     }
 
     // [L,R)区間取得
-    S query(int L, int R) {
-        L += n, R += n;
-        thrust(L / (L & -L));
-        thrust(R / (R & -R) - 1);
+    S query(int l, int r) {
+        l += n, r += n;
+        thrust(l / (l & -l));
+        thrust(r / (r & -r) - 1);
         S vl = e, vr = e;
-        while(L < R) {
-            if(L & 1) {
-                vl = op(vl, eval(L));
-                L++;
+        while(l < r) {
+            if(l & 1) {
+                vl = op(vl, eval(l));
+                l++;
             }
-            if(R & 1) {
-                R--;
-                vr = op(eval(R), vr);
+            if(r & 1) {
+                r--;
+                vr = op(eval(r), vr);
             }
-            L >>= 1;
-            R >>= 1;
+            l >>= 1;
+            r >>= 1;
         }
         return op(vl, vr);
     }
 
-    S at(int k) const { return query(k, k + 1); };
+    S at(int k) { return query(k, k + 1); };
 
     // !!未verify!!
-    int max_right(int l, function<bool(S)> f) const {
+    int max_right(int l, function<bool(S)> f) {
         if(l == org_size)
             return org_size;
         l += n;
         thrust(l / (l & -l));
-        S cum = e;
+        S cum = e();
         do {
             while(l % 2 == 0)
                 l >>= 1;
@@ -124,12 +152,12 @@ template <class S, class F> class LazySegTree {
     }
 
     // !!未verify!!
-    int min_left(int r, function<bool(S)> f) const {
+    int min_left(int r, function<bool(S)> f) {
         if(r == 0)
             return 0;
         r += n;
         thrust(r / (r & -r) - 1);
-        S cum = e;
+        S cum = e();
         do {
             r--;
             while(r > 1 && (r % 2))
@@ -148,37 +176,11 @@ template <class S, class F> class LazySegTree {
         } while((r & (-r) != r));
         return 0;
     }
-
-    LazySegTree(int sz, const Op op, const Mapping mapping,
-                const Composition composition, const S &e, const F &oe)
-        : op(op), mapping(mapping), composition(composition), e(e), oe(oe) {
-        org_size = sz;
-        n = 1;
-        while(n < org_size) {
-            n <<= 1;
-        }
-        node.resize(2 * n, e);
-        lazy.resize(2 * n, oe);
-    }
-    LazySegTree(const vector<S> &v, const Op op, const Mapping mapping,
-                const Composition composition, const S &e, const F &oe)
-        : op(op), mapping(mapping), composition(composition), e(e), oe(oe) {
-        org_size = v.size();
-        n = 1;
-        while(n < org_size) {
-            n <<= 1;
-        }
-        node.resize(2 * n, e);
-        lazy.resize(2 * n, oe);
-        for(int i = 0; i < org_size; i++)
-            set(i, v[i]);
-        build();
-    }
 };
-struct S {};
-struct F {};
-S op(S a, S b){};
-S mapping(S a, F f){};
-F composition(F f, F g){};
-S e() {}
-F id() {}
+using S = int;
+using F = int;
+S e() { return int(1e9); }
+F id() { return -1; }
+S op(S a, S b) { return min(a, b); };
+S mapping(S a, F f) { return a == id() ? f : a; };
+F composition(F f, F g) { return f == id() ? g : f; };
