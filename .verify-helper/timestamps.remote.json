@@ -1,6 +1,9 @@
 {
-"verify/convolution_mod.test.cpp": "2023-09-03 21:37:03 +0900",
-"verify/inv_of_formal_power_series.test.cpp": "2023-09-03 21:37:03 +0900",
-"verify/range_chmin_chmax_add_range_sum.test.cpp": "2023-09-03 21:37:03 +0900",
-"verify/unionfind.test.cpp": "2023-09-03 21:37:03 +0900"
+"verify/convolution_mod.test.cpp": "2023-09-03 22:05:29 +0900",
+"verify/inv_of_formal_power_series.test.cpp": "2023-09-03 22:05:29 +0900",
+"verify/range_chmin_chmax_add_range_sum.test.cpp": "2023-09-03 22:05:29 +0900",
+"verify/staticrmq.test.cpp": "2023-09-03 22:05:29 +0900",
+"verify/unionfind.test.cpp": "2023-09-03 22:05:29 +0900",
+"verify/vertex_add_path_sum.test.cc": "2023-09-03 22:05:29 +0900",
+"verify/vertex_add_subtree_sum.test.cc": "2023-09-03 22:05:29 +0900"
 }
